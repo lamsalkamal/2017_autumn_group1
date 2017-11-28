@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
-
+import './header.css';
+import {Grid,Row,Col} from 'react-bootstrap'
 class Header extends Component {
     render () {
         return (
-            <div  className = "App-header">
-              Forest Indicator
-            </div>
+            
+            <Row>
+            <Col sm="12" xm="12" className="header">
+              <h1>{this.props.header }</h1>
+            </Col>
+            </Row>
+            
         )
     }
 }
