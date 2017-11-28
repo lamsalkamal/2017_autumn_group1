@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header.js';
-import RegionLevel from './components/RegionLevel.js';
+import Region from './components/Region.js';
 
 class App extends Component {
   render() {
@@ -10,7 +10,8 @@ class App extends Component {
       <div className="App">
         <header > <Header/> </header>
         
-        <RegionLevel/>
+        <region> <Region/>  </region>
+
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
