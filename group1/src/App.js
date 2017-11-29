@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 
-import './App.css';
+//import './App.css';
 
-import Body from './components/body.js'
+//import Body from './components/body.js'
 //import {Row,Grid,Col ,Button } from 'react-bootstrap'
+import Region from './components/Region.js'
 
 class App extends Component {
   render(
   ) {
     return (
 
-      
-      <div>
+      <div className="App">
+        <region> <Region/> </region>
         
-          <Body />   
-      </div>
+         
+
+       
+      </div>   
     );
   }
 }
