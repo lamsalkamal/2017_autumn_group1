@@ -5,13 +5,8 @@ function getRegionLevels()
     return new Promise((resolve , reject) => {
         axios.get("http://melatupa.azurewebsites.net/regionLevels")
         .then(results => {
-            console.log(results);
-            /*const items = results.data.map(element => {
-                element.dueDate = moment(element.dueDate);
-                return element;
-                return results;
-            });*/
-            resolve(results);
+            const items = results.data;
+            resolve(items);
         })
         .catch(error => {
             console.log(error);
@@ -19,6 +14,7 @@ function getRegionLevels()
         })
     });
 }
+
 
 function getRegionLevelRegions(id)
 {
