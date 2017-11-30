@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 //import Body from './components/body.js'
 //import {Row,Grid,Col ,Button } from 'react-bootstrap'
-import Region from './components/Region.js'
+import Region from './components/TestLeftBar.js'
 
 class App extends Component {
   render(
@@ -12,7 +12,7 @@ class App extends Component {
     return (
 
       <div className="App">
-        <region> <Region/> </region>
+        <Region/>
         
          
 
