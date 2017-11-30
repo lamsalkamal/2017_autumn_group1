@@ -32,6 +32,7 @@ class RegionLevel extends Component {
         <div>
         Aluetaso 
             <select id="regionLevelId" onChange={this.change}>
+            <option disabled selected="selected"> -- select an option -- </option>
                 {regionLevels}
             </select>         
         </div>
@@ -44,13 +45,15 @@ class Region extends Component {
       super(props);
   
       this.state = {
-          regionLevelChosen : "1",
+          regionLevel : "1",
           regions : [],
-          scenarios : []
+          scenariosCollection : [],
+          regionId : "1"
         };
 
         this.handleRegionUpdate = this.handleRegionUpdate.bind(this);
         this.change = this.change.bind(this);
+        this.changeScenarioCollectionId = this.changeScenarioCollectionId.bind(this);
     }
   
     componentDidMount() {
@@ -58,14 +61,15 @@ class Region extends Component {
     }
   
     RegionLevel() {
-        fetch(`http://melatupa.azurewebsites.net/regionLevels/${this.state.regionLevelChosen}/regions`)
+      /*
+        fetch(`http://melatupa.azurewebsites.net/regionLevels/${this.state.regionLevel}/regions`)
         .then(result=>result.json())
-        .then(regions=>this.setState({regions}))
+        .then(regions=>this.setState({regions}))*/
     }
 
-    handleRegionUpdate(filterValue) {
-      this.setState({regionLevelChosen : filterValue}, function() {
-        fetch(`http://melatupa.azurewebsites.net/regionLevels/${this.state.regionLevelChosen}/regions`)
+    handleRegionUpdate(regLevel) {
+      this.setState({regionLevel : regLevel}, function() {
+        fetch(`http://melatupa.azurewebsites.net/regionLevels/${this.state.regionLevel}/regions`)
         .then(result=>result.json())
         .then(regions=>this.setState({regions}))
       });
@@ -74,14 +78,21 @@ class Region extends Component {
     change(event){
       var index = event.nativeEvent.target.selectedIndex;
       var scenariosArray = this.state.regions[index].scenarioCollections;
-      this.setState({scenarios : scenariosArray}, function() {
+      this.setState({scenariosCollection : scenariosArray}, function() {
       });
+      this.setState({regionId : event.target.value}, function() {
+      });
+   }   
+
+    changeScenarioCollectionId(event) {
+      this.props.updateScenarioCollection(event.target.value, this.state.regionId);
    }
-  
+
+   
     render() {  
 
       const regions = this.state.regions.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
-      const scenarios = this.state.scenarios.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
+      const scenariosCollection = this.state.scenariosCollection.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
       return (
         <div>
             <RegionLevel updateRegionLevel={this.handleRegionUpdate}/> 
@@ -91,24 +102,23 @@ class Region extends Component {
            </select>   
            <hr/>
            Skenaariokokoelma
-           <select id="scenarioCollectionId">  
-              {scenarios}
+           <select id="scenarioCollectionId" onChange={this.changeScenarioCollectionId}>  
+              {scenariosCollection}
            </select>          
         </div>
       );
     }
   }
-/*
+
   class Scenario extends Component {
     constructor(props) {
       super(props);
   
       this.state = {
-        regionChosen : "",
-        scenarios : []
+        scenariosA : []
         };
 
-        this.handleScenarioUpdate = this.handleScenarioUpdate.bind(this);
+        this.updateScenarioCollectionId = this.updateScenarioCollectionId.bind(this);
     }
   
     componentDidMount() {
@@ -116,33 +126,36 @@ class Region extends Component {
     }
   
     Scenario() {
-        fetch(`http://melatupa.azurewebsites.net/regionLevels/1/regions`)
-        .then(result=>result.json())
-        .then(scenarios=>this.setState({scenarios}))
     }
 
-    handleScenarioUpdate(filterValue) {
-      this.setState({regionChosen : filterValue}, function() {
-        fetch(`http://melatupa.azurewebsites.net/regionLevels/1/regions`)
+    updateScenarioCollectionId(scenarioCollectionId, regionId) {
+        fetch(`http://melatupa.azurewebsites.net/scenarioCollection/${scenarioCollectionId}/region/${regionId}`)
         .then(result=>result.json())
-        .then(scenarios=>this.setState({scenarios}))
-      });
+        .then(scenariosA=>this.setState({scenariosA}))
     }
   
     render() {
-      console.log(this.props.regionLevelChosen);
-     const scenarios = this.state.scenarios.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
+     const contentScenarios = this.state.scenariosA.length>0 ? this.state.scenariosA[0].scenarios : []
+     const scenarios = contentScenarios.map(item=><li key={item.id} value={item.name}>{item.description}</li>)
+
+     const contentDates = this.state.scenariosA.length>0 ? this.state.scenariosA[0].timePeriods : []
+     const periods = contentDates.map(item=><li key={item.id}>{item.yearStart} - {item.yearEnd}</li>)
+
       return (
         <div id="layout-content" className="layout-content-wrapper">
-            <Region updateRegion={this.handleScenarioUpdate}/> 
+            <Region updateScenarioCollection={this.updateScenarioCollectionId}/> 
             
-            <select id="scenarioId">
-             {scenarios}
-           </select>   
+            <ul id="scenarioId" >
+              {scenarios}
+           </ul>   
+
+           <ul id="periodId" >
+              {periods}
+           </ul>  
                   
         </div>
       );
     }
   }
-*/
-  export default Region
+
+  export default Scenario
