@@ -1,4 +1,9 @@
 import React, { Component } from 'react'
+<<<<<<< HEAD
+import apiData from './Data/getData'
+=======
+import $ from 'jquery'
+>>>>>>> 730457651072b7bc44db64080ecfcc885d79aa22
 
 class RegionLevel extends Component {
     constructor(props) {
@@ -13,12 +18,12 @@ class RegionLevel extends Component {
   
     componentDidMount() {
       this.RegionLevel();
-    }
+    } 
   
     RegionLevel() {
-      fetch(`http://melatupa.azurewebsites.net/regionLevels`)
- 		.then(result=>result.json())
-        .then(regionsLevels=>this.setState({regionsLevels}))
+      apiData.getRegionLevels().then(result => {
+      this.setState( { regionsLevels : result} )
+    });
     }
 
     change(event){
@@ -67,12 +72,25 @@ class Region extends Component {
         .then(regions=>this.setState({regions}))*/
     }
 
-    handleRegionUpdate(regLevel) {
+    handleRegionUpdate(regLevel) {      
       this.setState({regionLevel : regLevel}, function() {
+<<<<<<< HEAD
+        apiData.getRegionLevelRegions(this.state.regionLevel).then(result => {
+          this.setState( { regions : result} )
+        }
+      );
+     });
+=======
         fetch(`http://melatupa.azurewebsites.net/regionLevels/${this.state.regionLevel}/regions`)
         .then(result=>result.json())
         .then(regions=>this.setState({regions}))
+
+        console.log("event waiting to be triggered")
+
+       // var event = new Event('change');
+        $("regionId").change();
       });
+>>>>>>> 730457651072b7bc44db64080ecfcc885d79aa22
     }
 
     change(event){
@@ -82,6 +100,12 @@ class Region extends Component {
       });
       this.setState({regionId : event.target.value}, function() {
       });
+
+      console.log("event triggered")
+      //this.changeScenarioCollectionId(event)
+    /*  console.log("event called")
+      var event = new Event('change');
+      document.getElementById("scenarioCollectionId").dispatchEvent(event);*/
    }   
 
     changeScenarioCollectionId(event) {
@@ -129,28 +153,40 @@ class Region extends Component {
     }
 
     updateScenarioCollectionId(scenarioCollectionId, regionId) {
-        fetch(`http://melatupa.azurewebsites.net/scenarioCollection/${scenarioCollectionId}/region/${regionId}`)
-        .then(result=>result.json())
-        .then(scenariosA=>this.setState({scenariosA}))
+        apiData.getScenarioCollection(scenarioCollectionId, regionId).then(result => {
+          this.setState( { scenariosA : result } )
+        })
     }
   
     render() {
+      console.log(this.state.scenariosA)
      const contentScenarios = this.state.scenariosA.length>0 ? this.state.scenariosA[0].scenarios : []
      const scenarios = contentScenarios.map(item=><li key={item.id} value={item.name}>{item.description}</li>)
 
      const contentDates = this.state.scenariosA.length>0 ? this.state.scenariosA[0].timePeriods : []
      const periods = contentDates.map(item=><li key={item.id}>{item.yearStart} - {item.yearEnd}</li>)
 
+     const contentIndicators = this.state.scenariosA.length>0 ? this.state.scenariosA[0].indicatorCategories : []
+     console.log(contentIndicators) // HAVE TO PRINT THIS NOW
+     const indicatorsCategories = contentIndicators.map(item=><li key={item.id}>{item.name}</li>)
+     
+
+
       return (
         <div id="layout-content" className="layout-content-wrapper">
             <Region updateScenarioCollection={this.updateScenarioCollectionId}/> 
-            
+            <hr></hr>
+            SCENARIOS
             <ul id="scenarioId" >
               {scenarios}
            </ul>   
-
+            PERIODS
            <ul id="periodId" >
               {periods}
+           </ul>  
+            INDICATORS
+           <ul id="IndicatorId" >
+              {indicatorsCategories}
            </ul>  
                   
         </div>

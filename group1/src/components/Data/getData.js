@@ -20,15 +20,12 @@ function getRegionLevelRegions(id)
 {
 
   return new Promise((resolve , reject) => {
-    axios.get("http://melatupa.azurewebsites.net/regionLevels/" +id + "/regions")
+    axios.get("http://melatupa.azurewebsites.net/regionLevels/" +id +"/regions")
     .then(results => {
-        console.log(results);
-        /*const items = results.data.map(element => {
-            element.dueDate = moment(element.dueDate);
-            return element;
-            return results;
-        });*/
-        resolve(results);
+            //console.log(results)
+            const items = results.data;
+            console.log(items)
+        resolve(items);
     })
     .catch(error => {
         console.log(error);
@@ -43,13 +40,9 @@ function getScenarioCollection(collectionId , regionId)
  return new Promise((resolve , reject) => {
     axios.get( "http://melatupa.azurewebsites.net/scenarioCollection/"+ collectionId +"/region/"+regionId)
     .then(results => {
-        console.log(results);
-        /*const items = results.data.map(element => {
-            element.dueDate = moment(element.dueDate);
-            return element;
-            return results;
-        });*/
-        resolve(results);
+        const items = results.data;
+        console.log(items);
+        resolve(items);
     })
     .catch(error => {
         console.log(error);
