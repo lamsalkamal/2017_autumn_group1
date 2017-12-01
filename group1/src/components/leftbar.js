@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-//import $ from 'jquery'
+import apiData from './Data/getData'
+import $ from 'jquery'
 
 class RegionLevel extends Component {
     constructor(props) {
@@ -14,12 +15,12 @@ class RegionLevel extends Component {
   
     componentDidMount() {
       this.RegionLevel();
-    }
+    } 
   
     RegionLevel() {
-      fetch(`http://melatupa.azurewebsites.net/regionLevels`)
- 		.then(result=>result.json())
-        .then(regionsLevels=>this.setState({regionsLevels}))
+      apiData.getRegionLevels().then(result => {
+      this.setState( { regionsLevels : result} )
+    });
     }
 
     change(event){
@@ -70,10 +71,11 @@ class Region extends Component {
 
     handleRegionUpdate(regLevel) {      
       this.setState({regionLevel : regLevel}, function() {
-        fetch(`http://melatupa.azurewebsites.net/regionLevels/${this.state.regionLevel}/regions`)
-        .then(result=>result.json())
-        .then(regions=>this.setState({regions}))
-      });
+
+        apiData.getRegionLevelRegions(this.state.regionLevel).then(result => {
+          this.setState( { regions : result} )
+        });
+     });
     }
 
     change(event){
@@ -131,9 +133,9 @@ class Region extends Component {
     }
 
     updateScenarioCollectionId(scenarioCollectionId, regionId) {
-        fetch(`http://melatupa.azurewebsites.net/scenarioCollection/${scenarioCollectionId}/region/${regionId}`)
-        .then(result=>result.json())
-        .then(scenariosA=>this.setState({scenariosA}))
+        apiData.getScenarioCollection(scenarioCollectionId, regionId).then(result => {
+          this.setState( { scenariosA : result } )
+        })
     }
   
     render() {
