@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
-<<<<<<< HEAD
-<<<<<<< HEAD
 import apiData from './Data/getData'
-=======
 import $ from 'jquery'
->>>>>>> 730457651072b7bc44db64080ecfcc885d79aa22
-=======
-import $ from 'jquery'
->>>>>>> master
 
 class RegionLevel extends Component {
     constructor(props) {
@@ -78,23 +71,12 @@ class Region extends Component {
 
     handleRegionUpdate(regLevel) {      
       this.setState({regionLevel : regLevel}, function() {
-<<<<<<< HEAD
+
         apiData.getRegionLevelRegions(this.state.regionLevel).then(result => {
           this.setState( { regions : result} )
         }
       );
      });
-=======
-        fetch(`http://melatupa.azurewebsites.net/regionLevels/${this.state.regionLevel}/regions`)
-        .then(result=>result.json())
-        .then(regions=>this.setState({regions}))
-
-        console.log("event waiting to be triggered")
-
-       // var event = new Event('change');
-        $("regionId").change();
-      });
->>>>>>> 730457651072b7bc44db64080ecfcc885d79aa22
     }
 
     change(event){
