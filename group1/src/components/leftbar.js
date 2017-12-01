@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import apiData from './Data/getData'
 =======
 import $ from 'jquery'
 >>>>>>> 730457651072b7bc44db64080ecfcc885d79aa22
+=======
+import $ from 'jquery'
+>>>>>>> master
 
 class RegionLevel extends Component {
     constructor(props) {
