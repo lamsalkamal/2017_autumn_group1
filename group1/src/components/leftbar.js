@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import $ from 'jquery'
+//import $ from 'jquery'
 
 class RegionLevel extends Component {
     constructor(props) {
@@ -73,11 +73,6 @@ class Region extends Component {
         fetch(`http://melatupa.azurewebsites.net/regionLevels/${this.state.regionLevel}/regions`)
         .then(result=>result.json())
         .then(regions=>this.setState({regions}))
-
-        console.log("event waiting to be triggered")
-
-       // var event = new Event('change');
-        $("regionId").change();
       });
     }
 
@@ -88,12 +83,6 @@ class Region extends Component {
       });
       this.setState({regionId : event.target.value}, function() {
       });
-
-      console.log("event triggered")
-      //this.changeScenarioCollectionId(event)
-    /*  console.log("event called")
-      var event = new Event('change');
-      document.getElementById("scenarioCollectionId").dispatchEvent(event);*/
    }   
 
     changeScenarioCollectionId(event) {
@@ -105,6 +94,7 @@ class Region extends Component {
 
       const regions = this.state.regions.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
       const scenariosCollection = this.state.scenariosCollection.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
+      
       return (
         <div>
             <RegionLevel updateRegionLevel={this.handleRegionUpdate}/> 
@@ -147,7 +137,6 @@ class Region extends Component {
     }
   
     render() {
-      console.log(this.state.scenariosA)
      const contentScenarios = this.state.scenariosA.length>0 ? this.state.scenariosA[0].scenarios : []
      const scenarios = contentScenarios.map(item=><li key={item.id} value={item.name}>{item.description}</li>)
 
@@ -155,10 +144,10 @@ class Region extends Component {
      const periods = contentDates.map(item=><li key={item.id}>{item.yearStart} - {item.yearEnd}</li>)
 
      const contentIndicators = this.state.scenariosA.length>0 ? this.state.scenariosA[0].indicatorCategories : []
-     console.log(contentIndicators) // HAVE TO PRINT THIS NOW
-     const indicatorsCategories = contentIndicators.map(item=><li key={item.id}>{item.name}</li>)
-     
-
+     var indicators = []
+     const indicatorsCategories = contentIndicators.map(item=>  
+     (item.indicators.map(indic=><li key={indic.id}>{item.name} - {indic.name}</li>))
+    )
 
       return (
         <div id="layout-content" className="layout-content-wrapper">
