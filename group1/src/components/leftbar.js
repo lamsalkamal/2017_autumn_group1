@@ -88,8 +88,7 @@ class Region extends Component {
 
         apiData.getRegionLevelRegions(this.state.regionLevel).then(result => {
           this.setState( { regions : result} )
-        }
-      );
+        });
      });
     }
 
@@ -100,12 +99,6 @@ class Region extends Component {
       });
       this.setState({regionId : event.target.value}, function() {
       });
-
-      console.log("event triggered")
-      //this.changeScenarioCollectionId(event)
-    /*  console.log("event called")
-      var event = new Event('change');
-      document.getElementById("scenarioCollectionId").dispatchEvent(event);*/
    }   
 
     changeScenarioCollectionId(event) {
@@ -117,6 +110,7 @@ class Region extends Component {
 
       const regions = this.state.regions.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
       const scenariosCollection = this.state.scenariosCollection.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
+      
       return (
         <div>
             <RegionLevel updateRegionLevel={this.handleRegionUpdate}/> 
@@ -159,7 +153,6 @@ class Region extends Component {
     }
   
     render() {
-      console.log(this.state.scenariosA)
      const contentScenarios = this.state.scenariosA.length>0 ? this.state.scenariosA[0].scenarios : []
      const scenarios = contentScenarios.map(item=><li key={item.id} value={item.name}>{item.description}</li>)
 
@@ -167,11 +160,27 @@ class Region extends Component {
      const periods = contentDates.map(item=><li key={item.id}>{item.yearStart} - {item.yearEnd}</li>)
 
      const contentIndicators = this.state.scenariosA.length>0 ? this.state.scenariosA[0].indicatorCategories : []
-     console.log(contentIndicators) // HAVE TO PRINT THIS NOW
-     const indicatorsCategories = contentIndicators.map(item=><li key={item.id}>{item.name}</li>)
-     
+     var indicators = []
 
+     //console.log(contentIndicators)
+     const indicatorsArray = contentIndicators.map(item=>
+     (item.indicators.map(indic=><li key={indic.id}>{indic.name}</li>))
+    )
 
+    const indicatorCategories = contentIndicators.map(item=><h1 key={item.id}>{item.name}</h1>)
+
+    Array.prototype.insert = function ( index, item ) {
+      this.splice( index, 0, item );
+    };
+
+    var count = 0
+    var numbers = 0
+    indicatorsArray.forEach(function(element) {
+        indicatorsArray.insert(count, indicatorCategories[numbers])
+        count+=2
+        numbers++
+    });
+  
       return (
         <div id="layout-content" className="layout-content-wrapper">
             <Region updateScenarioCollection={this.updateScenarioCollectionId}/> 
@@ -185,8 +194,8 @@ class Region extends Component {
               {periods}
            </ul>  
             INDICATORS
-           <ul id="IndicatorId" >
-              {indicatorsCategories}
+           <ul id="indicatorId" >
+              {indicatorsArray}
            </ul>  
                   
         </div>
