@@ -121,11 +121,13 @@ class Region extends Component {
         scenariosA : []
         };
 
-        this.updateScenarioCollectionId = this.updateScenarioCollectionId.bind(this);
+        this.updateScenarioCollectionId = this.updateScenarioCollectionId.bind(this);        
+        this.onC = this.onC.bind(this);
+        this.findElementsByClassName = this.findElementsByClassName.bind(this)
     }
   
     componentDidMount() {
-      this.Scenario();
+      this.Scenario();   
     }
   
     Scenario() {
@@ -136,20 +138,34 @@ class Region extends Component {
           this.setState( { scenariosA : result } )
         })
     }
+
+    onC(e, data) {
+      if (e.target.className === "labelChosen") {
+          e.target.className = "labelNotChosen"
+      }
+      else {
+        e.target.className = "labelChosen"
+      }
+    }
+
+    findElementsByClassName(className) {
+      console.log(document.getElementsByClassName(className));
+    }
   
     render() {
      const contentScenarios = this.state.scenariosA.length>0 ? this.state.scenariosA[0].scenarios : []
-     const scenarios = contentScenarios.map(item=><li key={item.id} value={item.name}>{item.description}</li>)
+     const scenarios = contentScenarios.map(item=> <div key={item.id}> <label id={item.name} value={item.id} className="labelNotChosen" onClick={(e) => this.onC(e, item.id)} >{item.description} </label> </div>)
 
      const contentDates = this.state.scenariosA.length>0 ? this.state.scenariosA[0].timePeriods : []
-     const periods = contentDates.map(item=><li key={item.id}>{item.yearStart} - {item.yearEnd}</li>)
+     const periods = contentDates.map(item=> <div key={item.id}> <label  id={item.yearStart} value={item.id} className="labelNotChosen" onClick={(e) => this.onC(e, item.id)}>{item.yearStart} - {item.yearEnd}  </label></div>)
+  
 
      const contentIndicators = this.state.scenariosA.length>0 ? this.state.scenariosA[0].indicatorCategories : []
      var indicators = []
 
      //console.log(contentIndicators)
      const indicatorsArray = contentIndicators.map(item=>
-     (item.indicators.map(indic=><li key={indic.id}>{indic.name}</li>))
+     (item.indicators.map(indic=> <div  key={indic.id}> <label  value={indic.id}  className="labelNotChosen" onClick={(e) => this.onC(e, indic.id)} >{indic.name}</label> </div>))
     )
 
     const indicatorCategories = contentIndicators.map(item=><h1 key={item.id}>{item.name}</h1>)
@@ -179,9 +195,11 @@ class Region extends Component {
               {periods}
            </ul>  
             INDICATORS
-           <ul id="indicatorId" >
+           <ul id="indicatorId">
               {indicatorsArray}
            </ul>  
+
+           <button onClick={() => this.findElementsByClassName("labelChosen")}> click me! </button>
                   
         </div>
       );

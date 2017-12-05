@@ -7,3 +7,9 @@
 .leftHeadPadding{
     padding-bottom:1em;
 }
+.labelChosen{
+    color:red
+}
+.labelNotChosen{
+    color:black
+}
