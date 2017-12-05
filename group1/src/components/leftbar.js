@@ -6,18 +6,21 @@ class RegionLevel extends Component {
       super(props);
   
       this.state = {
-          regionsLevels : []
+          regionsLevels : [],
+          lang : true
         };
 
         this.change = this.change.bind(this);
+        this.langChange = this.langChange.bind(this);
     }
-  
+    
+
     componentDidMount() {
       this.RegionLevel();
     } 
   
     RegionLevel() {
-      apiData.getRegionLevels().then(result => {
+      apiData.getRegionLevels(this.state.lang).then(result => {
       this.setState( { regionsLevels : result} )
     });
     }
@@ -26,11 +29,23 @@ class RegionLevel extends Component {
         var value = event.target.value;
         this.props.updateRegionLevel(value);
      }
-  
+     
+     langChange()
+     {
+      this.setState({ lang: !this.state.lang }, function() {
+        apiData.getRegionLevels(this.state.lang).then(result => {
+          this.setState( { regionsLevels : result} )
+        });
+      });
+     }
+
     render() {
+      
       const regionLevels = this.state.regionsLevels.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
       return (
         <div>
+          <button className="btn btn-default"
+                                onClick={ this.langChange }>Language</button>
         Aluetaso 
             <select id="regionLevelId" onChange={this.change}>
             <option disabled selected="selected"> -- select an option -- </option>

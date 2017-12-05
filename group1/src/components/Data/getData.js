@@ -1,10 +1,24 @@
 import axios from 'axios';
 
-function getRegionLevels()
-{
+var headers =  { headers: {
+    'Accept-Language': 'en' }
+    }
+
+function getRegionLevels(lang)
+{   
+    if(lang === true){
+        headers =  { headers: {
+            'Accept-Language': 'fi' }
+            }  
+    }else {
+        headers =  { headers: {
+            'Accept-Language': 'en' }
+            }
+    }
     return new Promise((resolve , reject) => {
-        axios.get("http://melatupa.azurewebsites.net/regionLevels")
+        axios.get("http://melatupa.azurewebsites.net/regionLevels" , headers)
         .then(results => {
+            //console.log(results)
             const items = results.data;
             resolve(items);
         })
@@ -20,7 +34,7 @@ function getRegionLevelRegions(id)
 {
 
   return new Promise((resolve , reject) => {
-    axios.get("http://melatupa.azurewebsites.net/regionLevels/" +id +"/regions")
+    axios.get("http://melatupa.azurewebsites.net/regionLevels/" +id +"/regions" , headers)
     .then(results => {
             //console.log(results)
             const items = results.data;
@@ -38,7 +52,7 @@ function getScenarioCollection(collectionId , regionId)
 {
 
  return new Promise((resolve , reject) => {
-    axios.get( "http://melatupa.azurewebsites.net/scenarioCollection/"+ collectionId +"/region/"+regionId)
+    axios.get( "http://melatupa.azurewebsites.net/scenarioCollection/"+ collectionId +"/region/"+regionId, headers)
     .then(results => {
         const items = results.data;
        // console.log(items);
