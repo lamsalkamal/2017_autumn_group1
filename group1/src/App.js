@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-//import './App.css';
+import './components/LeftBar.css';
 
 //import Body from './components/body.js'
 //import {Row,Grid,Col ,Button } from 'react-bootstrap'

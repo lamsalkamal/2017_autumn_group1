@@ -24,7 +24,7 @@ function getRegionLevelRegions(id)
     .then(results => {
             //console.log(results)
             const items = results.data;
-            console.log(items)
+           // console.log(items)
         resolve(items);
     })
     .catch(error => {
@@ -41,7 +41,7 @@ function getScenarioCollection(collectionId , regionId)
     axios.get( "http://melatupa.azurewebsites.net/scenarioCollection/"+ collectionId +"/region/"+regionId)
     .then(results => {
         const items = results.data;
-        console.log(items);
+       // console.log(items);
         resolve(items);
     })
     .catch(error => {

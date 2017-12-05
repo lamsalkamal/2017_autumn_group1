@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import apiData from './Data/getData'
-import $ from 'jquery'
 
 class RegionLevel extends Component {
     constructor(props) {
@@ -147,10 +146,26 @@ class Region extends Component {
 
      const contentIndicators = this.state.scenariosA.length>0 ? this.state.scenariosA[0].indicatorCategories : []
      var indicators = []
-     const indicatorsCategories = contentIndicators.map(item=>  
-     (item.indicators.map(indic=><li key={indic.id}>{item.name} - {indic.name}</li>))
+
+     //console.log(contentIndicators)
+     const indicatorsArray = contentIndicators.map(item=>
+     (item.indicators.map(indic=><li key={indic.id}>{indic.name}</li>))
     )
 
+    const indicatorCategories = contentIndicators.map(item=><h1 key={item.id}>{item.name}</h1>)
+
+    Array.prototype.insert = function ( index, item ) {
+      this.splice( index, 0, item );
+    };
+
+    var count = 0
+    var numbers = 0
+    indicatorsArray.forEach(function(element) {
+        indicatorsArray.insert(count, indicatorCategories[numbers])
+        count+=2
+        numbers++
+    });
+  
       return (
         <div id="layout-content" className="layout-content-wrapper">
             <Region updateScenarioCollection={this.updateScenarioCollectionId}/> 
@@ -164,8 +179,8 @@ class Region extends Component {
               {periods}
            </ul>  
             INDICATORS
-           <ul id="IndicatorId" >
-              {indicatorsCategories}
+           <ul id="indicatorId" >
+              {indicatorsArray}
            </ul>  
                   
         </div>
