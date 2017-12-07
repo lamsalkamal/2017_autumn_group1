@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import apiData from './Data/getData'
-import {Row,Grid,Col,Button,FormControl,FormGroup} from 'react-bootstrap'
+import {Row,Grid,Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class RegionLevel extends Component {
@@ -45,7 +45,7 @@ class RegionLevel extends Component {
       
       const regionLevels = this.state.regionsLevels.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
       return (
-        <Col xs='12' md='12'>
+        <Col xs={12}  md={12} >
         <span>         
           <button className="btn btn-default"
                                 onClick={ this.langChange }>Language</button>
@@ -119,7 +119,7 @@ class Region extends Component {
       const scenariosCollection = this.state.scenariosCollection.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
       
       return (
-        <Col xs='12' md='12'>
+        <Col xs={12}  md={12}>
         <Row>
             <RegionLevel updateRegionLevel={this.handleRegionUpdate}/> 
         </Row>
@@ -188,7 +188,6 @@ class Region extends Component {
   
 
      const contentIndicators = this.state.scenariosA.length>0 ? this.state.scenariosA[0].indicatorCategories : []
-     var indicators = []
 
      //console.log(contentIndicators)
      const indicatorsArray = contentIndicators.map(item=>
@@ -212,12 +211,12 @@ class Region extends Component {
       return (
         <Grid fluid id="layout-content" className="marginPage">
         <Row>
-          <Col xs='12' md='12' className='Header'>
+          <Col xs={12} md={12}  className='Header'>
             <h1> Forest Indicator </h1>
             </Col>
           </Row>
           <Row>
-              <Col xs='12' md='3' className='left'>
+              <Col xs={12}  md={3}  className='left'>
              <Row>      
             <Region updateScenarioCollection={this.updateScenarioCollectionId}/>            
              </Row>
@@ -234,21 +233,21 @@ class Region extends Component {
            </ul>
            </span>  
           </Col>
-          <Col xs='12' md='5'  className='Middle'>
+          <Col xs={12}  md={5}   className='Middle'>
             <h1> Graph here </h1>
            
     
-            <button type="button" class="Graph1">Graph1</button>
+            <button type="button" className="Graph1">Graph1</button>
             
             
-            <button type="button" class="Graph2">Graph2</button>
+            <button type="button" className="Graph2">Graph2</button>
 
-            <button type="button" class="Graph3">Graph3</button>
+            <button type="button" className="Graph3">Graph3</button>
 
-            <button type="button" class="Graph4">Graph4</button>
+            <button type="button" className="Graph4">Graph4</button>
           </Col>
         
-          <Col xs='12' md='3'  className='Right'>
+          <Col xs={12}  md={3}   className='Right'>
             <h4> Indicators </h4>
            <ul id="indicatorId">
               {indicatorsArray}
