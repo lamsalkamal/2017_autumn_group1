@@ -180,12 +180,13 @@ class Region extends Component {
     }
 
     onC(e, data) {
-      if (e.target.className === "labelChosen") {
-          e.target.className = "labelNotChosen"
+      if (e.target.className.indexOf("labelChosen")> -1) {
+        e.target.className = e.target.className.replace("labelChosen", "labelNotChosen")
       }
       else {
-        e.target.className = "labelChosen"
+        e.target.className = e.target.className.replace("labelNotChosen", "labelChosen")
       }
+      this.props.updateGraphNoValues()
     }
   
     render() {
@@ -244,7 +245,7 @@ class Region extends Component {
           </Col>
           <Col xs={12}  md={5}   className='Middle'>
             
-        <div id="container" Middle col-md-5 col-xs-12></div>
+        <div id="container"></div>
            
           </Col>
         
@@ -292,12 +293,22 @@ class Region extends Component {
       var periodsAccepted = []
       var indicatorsAccepted = []      
 
-      var scenariosArray = document.getElementsByClassName('scenarios')
-      var periodsArray = document.getElementsByClassName('periods')
-      var indicatorsArray = document.getElementsByClassName('indicators')
-
+      var scenariosArray = document.getElementsByClassName('labelChosen, scenarios')
+      for(var i=0; i<scenariosArray.length; i++) { 
+        scenariosAccepted.push(scenariosArray[i].attributes.getNamedItem("value").nodeValue)
+      }
+      var periodsArray = document.getElementsByClassName('labelChosen, periods')
+      for(var i=0; i<periodsArray.length; i++) { 
+        periodsAccepted.push(periodsArray[i].attributes.getNamedItem("value").nodeValue)
+      }
+      var indicatorsArray = document.getElementsByClassName('labelChosen, indicators')
+      for(var i=0; i<indicatorsArray.length; i++) { 
+        indicatorsAccepted.push(periodsArray[i].attributes.getNamedItem("value").nodeValue)
+      }
       
-      console.log(arrayResult)
+      this.state.valuesGraph.forEach(function(element) {
+          console.log(element)
+      })
     }
 
     render() {
@@ -330,7 +341,7 @@ class Region extends Component {
       return (
 
 
-           <Scenario updateGraphValues={this.updateGraph}/>
+           <Scenario updateGraphValues={this.updateGraph} updateGraphNoValues={this.refreshGraph}/>
            
       )
     }
