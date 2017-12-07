@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import './components/LeftBar.css';
+import './components/leftbar.css';
 
 //import Body from './components/body.js'
 //import {Row,Grid,Col ,Button } from 'react-bootstrap'
-import Scenario from './components/LeftBar.js'
+import Scenario from './components/leftbar.js'
 
 class App extends Component {
   render(

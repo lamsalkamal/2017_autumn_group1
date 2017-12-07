@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import apiData from './Data/getData'
+<<<<<<< HEAD
 import getStrings from './Data/langString'
+=======
+import {Row,Grid,Col} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+>>>>>>> 2df637356de59980588cf31e3ebdb1fed0d47e41
 
 class RegionLevel extends Component {
     constructor(props) {
@@ -46,6 +51,7 @@ class RegionLevel extends Component {
 
       const regionLevels = this.state.regionsLevels.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
       return (
+<<<<<<< HEAD
       <div>
         <b>Language</b>
         <select id="languageSelect" onChange={this.langChange}>
@@ -61,6 +67,22 @@ class RegionLevel extends Component {
             </select>         
         </div>
       </div>
+=======
+        <Col xs={12}  md={12} >
+        <span>         
+          <button className="btn btn-default"
+                                onClick={ this.langChange }>Language</button>
+        </span>
+        <span>
+        <h4>Aluetaso </h4>
+            <select id="regionLevelId" onChange={this.change}>
+            <option disabled selected="selected"> -- select an option -- </option>
+                {regionLevels}
+            </select> 
+          
+            </span>        
+        </Col>
+>>>>>>> 2df637356de59980588cf31e3ebdb1fed0d47e41
       );
     }
   }
@@ -121,18 +143,32 @@ class Region extends Component {
       const scenariosCollection = this.state.scenariosCollection.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
       
       return (
-        <div>
+        <Col xs={12}  md={12}>
+        <Row>
             <RegionLevel updateRegionLevel={this.handleRegionUpdate}/> 
+<<<<<<< HEAD
            {getStrings.getLangString().Area}
            <select id="regionId" onChange={this.change}>
              {regions}
            </select>   
            <hr/>
            {getStrings.getLangString().Scenariocollection}
+=======
+        </Row>
+        <span>    
+           <h4> Alue </h4>
+           <select id="regionId" onChange={this.change}>
+             {regions}
+           </select>   
+          </span>
+          <span>
+          <h4>Skenaariokokoelma</h4>
+>>>>>>> 2df637356de59980588cf31e3ebdb1fed0d47e41
            <select id="scenarioCollectionId" onChange={this.changeScenarioCollectionId}>  
               {scenariosCollection}
-           </select>          
-        </div>
+           </select>
+           </span>          
+        </Col>
       );
     }
   }
@@ -185,7 +221,6 @@ class Region extends Component {
   
 
      const contentIndicators = this.state.scenariosA.length>0 ? this.state.scenariosA[0].indicatorCategories : []
-     var indicators = []
 
      //console.log(contentIndicators)
      const indicatorsArray = contentIndicators.map(item=>
@@ -207,26 +242,55 @@ class Region extends Component {
     });
   
       return (
-        <div id="layout-content" className="layout-content-wrapper">
-            <Region updateScenarioCollection={this.updateScenarioCollectionId}/> 
-            <hr></hr>
-            SCENARIOS
+        <Grid fluid id="layout-content" className="marginPage">
+        <Row>
+          <Col xs={12} md={12}  className='Header'>
+            <h1> Forest Indicator </h1>
+            </Col>
+          </Row>
+          <Row>
+              <Col xs={12}  md={3}  className='left'>
+             <Row>      
+            <Region updateScenarioCollection={this.updateScenarioCollectionId}/>            
+             </Row>
+              <span className='paddBottom'>
+           <h4> Scenarios </h4>
             <ul id="scenarioId" >
               {scenarios}
-           </ul>   
-            PERIODS
+           </ul>  
+           </span>
+           <span>
+                         <h4> Periods </h4>
            <ul id="periodId" >
               {periods}
-           </ul>  
-            INDICATORS
+           </ul>
+           </span>  
+          </Col>
+          <Col xs={12}  md={5}   className='Middle'>
+            <h1> Graph here </h1>
+           
+    
+            <button type="button" className="Graph1">Graph1</button>
+            
+            
+            <button type="button" className="Graph2">Graph2</button>
+
+            <button type="button" className="Graph3">Graph3</button>
+
+            <button type="button" className="Graph4">Graph4</button>
+          </Col>
+        
+          <Col xs={12}  md={3}   className='Right'>
+            <h4> Indicators </h4>
            <ul id="indicatorId">
               {indicatorsArray}
-           </ul>  
-
-           <button onClick={() => this.findElementsByClassName("labelChosen")}> click me! </button>
-                  
-        </div>
-      );
+           </ul> 
+           </Col> 
+          </Row>
+          {/*  <button onClick={() => this.findElementsByClassName("labelChosen")}> click me! </button>
+                   */}
+        </Grid>
+      )
     }
   }
 
