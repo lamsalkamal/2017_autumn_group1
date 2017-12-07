@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import apiData from './Data/getData'
-<<<<<<< HEAD
 import getStrings from './Data/langString'
-=======
 import {Row,Grid,Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
->>>>>>> 2df637356de59980588cf31e3ebdb1fed0d47e41
 
 class RegionLevel extends Component {
     constructor(props) {
@@ -51,30 +48,16 @@ class RegionLevel extends Component {
 
       const regionLevels = this.state.regionsLevels.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
       return (
-<<<<<<< HEAD
-      <div>
+        <Col xs={12}  md={12} >
+        <span>         
         <b>Language</b>
         <select id="languageSelect" onChange={this.langChange}>
             <option selected="selected"> English </option>
             <option selected="selected"> Suomi </option>
             </select> 
-
-        <div>
-         {getStrings.getLangString().Regionlevel}
-            <select id="regionLevelId" onChange={this.change}>
-            <option disabled selected="selected"> -- select an option -- </option>
-                {regionLevels}
-            </select>         
-        </div>
-      </div>
-=======
-        <Col xs={12}  md={12} >
-        <span>         
-          <button className="btn btn-default"
-                                onClick={ this.langChange }>Language</button>
         </span>
         <span>
-        <h4>Aluetaso </h4>
+        <h4>{getStrings.getLangString().Regionlevel} </h4>
             <select id="regionLevelId" onChange={this.change}>
             <option disabled selected="selected"> -- select an option -- </option>
                 {regionLevels}
@@ -82,7 +65,6 @@ class RegionLevel extends Component {
           
             </span>        
         </Col>
->>>>>>> 2df637356de59980588cf31e3ebdb1fed0d47e41
       );
     }
   }
@@ -146,24 +128,15 @@ class Region extends Component {
         <Col xs={12}  md={12}>
         <Row>
             <RegionLevel updateRegionLevel={this.handleRegionUpdate}/> 
-<<<<<<< HEAD
-           {getStrings.getLangString().Area}
-           <select id="regionId" onChange={this.change}>
-             {regions}
-           </select>   
-           <hr/>
-           {getStrings.getLangString().Scenariocollection}
-=======
         </Row>
         <span>    
-           <h4> Alue </h4>
+           <h4> {getStrings.getLangString().Area} </h4>
            <select id="regionId" onChange={this.change}>
              {regions}
            </select>   
           </span>
           <span>
-          <h4>Skenaariokokoelma</h4>
->>>>>>> 2df637356de59980588cf31e3ebdb1fed0d47e41
+          <h4>{getStrings.getLangString().Scenariocollection}</h4>
            <select id="scenarioCollectionId" onChange={this.changeScenarioCollectionId}>  
               {scenariosCollection}
            </select>
