@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import apiData from './Data/getData'
+import {Row,Grid,Col,Button,FormControl,FormGroup} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class RegionLevel extends Component {
     constructor(props) {
@@ -43,15 +45,20 @@ class RegionLevel extends Component {
       
       const regionLevels = this.state.regionsLevels.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
       return (
-        <div>
+        <Col xs='12' md='12'>
+        <span>         
           <button className="btn btn-default"
                                 onClick={ this.langChange }>Language</button>
-        Aluetaso 
+        </span>
+        <span>
+        <h4>Aluetaso </h4>
             <select id="regionLevelId" onChange={this.change}>
             <option disabled selected="selected"> -- select an option -- </option>
                 {regionLevels}
-            </select>         
-        </div>
+            </select> 
+          
+            </span>        
+        </Col>
       );
     }
   }
@@ -112,18 +119,23 @@ class Region extends Component {
       const scenariosCollection = this.state.scenariosCollection.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
       
       return (
-        <div>
+        <Col xs='12' md='12'>
+        <Row>
             <RegionLevel updateRegionLevel={this.handleRegionUpdate}/> 
-            Alue
+        </Row>
+        <span>    
+           <h4> Alue </h4>
            <select id="regionId" onChange={this.change}>
              {regions}
            </select>   
-           <hr/>
-           Skenaariokokoelma
+          </span>
+          <span>
+          <h4>Skenaariokokoelma</h4>
            <select id="scenarioCollectionId" onChange={this.changeScenarioCollectionId}>  
               {scenariosCollection}
-           </select>          
-        </div>
+           </select>
+           </span>          
+        </Col>
       );
     }
   }
@@ -198,26 +210,55 @@ class Region extends Component {
     });
   
       return (
-        <div id="layout-content" className="layout-content-wrapper">
-            <Region updateScenarioCollection={this.updateScenarioCollectionId}/> 
-            <hr></hr>
-            SCENARIOS
+        <Grid fluid id="layout-content" className="marginPage">
+        <Row>
+          <Col xs='12' md='12' className='Header'>
+            <h1> Forest Indicator </h1>
+            </Col>
+          </Row>
+          <Row>
+              <Col xs='12' md='3' className='left'>
+             <Row>      
+            <Region updateScenarioCollection={this.updateScenarioCollectionId}/>            
+             </Row>
+              <span className='paddBottom'>
+           <h4> Scenarios </h4>
             <ul id="scenarioId" >
               {scenarios}
-           </ul>   
-            PERIODS
+           </ul>  
+           </span>
+           <span>
+                         <h4> Periods </h4>
            <ul id="periodId" >
               {periods}
-           </ul>  
-            INDICATORS
+           </ul>
+           </span>  
+          </Col>
+          <Col xs='12' md='5'  className='Middle'>
+            <h1> Graph here </h1>
+           
+    
+            <button type="button" class="Graph1">Graph1</button>
+            
+            
+            <button type="button" class="Graph2">Graph2</button>
+
+            <button type="button" class="Graph3">Graph3</button>
+
+            <button type="button" class="Graph4">Graph4</button>
+          </Col>
+        
+          <Col xs='12' md='3'  className='Right'>
+            <h4> Indicators </h4>
            <ul id="indicatorId">
               {indicatorsArray}
-           </ul>  
-
-           <button onClick={() => this.findElementsByClassName("labelChosen")}> click me! </button>
-                  
-        </div>
-      );
+           </ul> 
+           </Col> 
+          </Row>
+          {/*  <button onClick={() => this.findElementsByClassName("labelChosen")}> click me! </button>
+                   */}
+        </Grid>
+      )
     }
   }
 
