@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import apiData from './Data/getData'
+import getStrings from './Data/langString'
 
 class RegionLevel extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class RegionLevel extends Component {
 
     componentDidMount() {
       this.RegionLevel();
+      getStrings.chooseLang(this.state.lang);
     } 
   
     RegionLevel() {
@@ -31,27 +33,34 @@ class RegionLevel extends Component {
      }
      
      langChange()
-     {
-      this.setState({ lang: !this.state.lang }, function() {
+     { //Wouldn't work with more than 2 languages, but in this case we are only using 2.
+      this.setState({ lang: !this.state.lang }, function() {      
         apiData.getRegionLevels(this.state.lang).then(result => {
           this.setState( { regionsLevels : result} )
         });
+        getStrings.chooseLang(this.state.lang);
       });
      }
 
     render() {
-      
+
       const regionLevels = this.state.regionsLevels.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
       return (
+      <div>
+        <b>Language</b>
+        <select id="languageSelect" onChange={this.langChange}>
+            <option selected="selected"> English </option>
+            <option selected="selected"> Suomi </option>
+            </select> 
+
         <div>
-          <button className="btn btn-default"
-                                onClick={ this.langChange }>Language</button>
-        Aluetaso 
+         {getStrings.getLangString().Regionlevel}
             <select id="regionLevelId" onChange={this.change}>
             <option disabled selected="selected"> -- select an option -- </option>
                 {regionLevels}
             </select>         
         </div>
+      </div>
       );
     }
   }
@@ -114,12 +123,12 @@ class Region extends Component {
       return (
         <div>
             <RegionLevel updateRegionLevel={this.handleRegionUpdate}/> 
-            Alue
+           {getStrings.getLangString().Area}
            <select id="regionId" onChange={this.change}>
              {regions}
            </select>   
            <hr/>
-           Skenaariokokoelma
+           {getStrings.getLangString().Scenariocollection}
            <select id="scenarioCollectionId" onChange={this.changeScenarioCollectionId}>  
               {scenariosCollection}
            </select>          
