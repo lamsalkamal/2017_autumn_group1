@@ -15,6 +15,10 @@
     color:black
 }
 
+.test {
+    color:green
+}
+
 #regionLevelId {
 margin: 1px;
     border: 3px solid #4CAF50;

@@ -3,6 +3,12 @@ import apiData from './Data/getData'
 import getStrings from './Data/langString'
 import {Row,Grid,Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery'; 
+
+var Highcharts = require('highcharts');
+
+// Load module after Highcharts is loaded
+require('highcharts/modules/exporting')(Highcharts);
 
 class RegionLevel extends Component {
     constructor(props) {
@@ -156,7 +162,6 @@ class Region extends Component {
 
         this.updateScenarioCollectionId = this.updateScenarioCollectionId.bind(this);        
         this.onC = this.onC.bind(this);
-        this.findElementsByClassName = this.findElementsByClassName.bind(this)
     }
   
     componentDidMount() {
@@ -168,8 +173,10 @@ class Region extends Component {
 
     updateScenarioCollectionId(scenarioCollectionId, regionId) {
         apiData.getScenarioCollection(scenarioCollectionId, regionId).then(result => {
-          this.setState( { scenariosA : result } )
+          this.setState( { scenariosA : result }, () => {
+            this.props.updateGraphValues(this.state.scenariosA)
         })
+      })
     }
 
     onC(e, data) {
@@ -180,24 +187,20 @@ class Region extends Component {
         e.target.className = "labelChosen"
       }
     }
-
-    findElementsByClassName(className) {
-      console.log(document.getElementsByClassName(className));
-    }
   
     render() {
      const contentScenarios = this.state.scenariosA.length>0 ? this.state.scenariosA[0].scenarios : []
-     const scenarios = contentScenarios.map(item=> <div key={item.id}> <label id={item.name} value={item.id} className="labelNotChosen" onClick={(e) => this.onC(e, item.id)} >{item.description} </label> </div>)
+     const scenarios = contentScenarios.map(item=> <div key={item.id}> <label id={item.name} value={item.id} className="labelNotChosen, scenarios" onClick={(e) => this.onC(e, item.id)} >{item.description} </label> </div>)
 
      const contentDates = this.state.scenariosA.length>0 ? this.state.scenariosA[0].timePeriods : []
-     const periods = contentDates.map(item=> <div key={item.id}> <label  id={item.yearStart} value={item.id} className="labelNotChosen" onClick={(e) => this.onC(e, item.id)}>{item.yearStart} - {item.yearEnd}  </label></div>)
+     const periods = contentDates.map(item=> <div key={item.id}> <label  id={item.yearStart} value={item.id} className="labelNotChosen, periods" onClick={(e) => this.onC(e, item.id)}>{item.yearStart} - {item.yearEnd}  </label></div>)
   
 
      const contentIndicators = this.state.scenariosA.length>0 ? this.state.scenariosA[0].indicatorCategories : []
 
      //console.log(contentIndicators)
      const indicatorsArray = contentIndicators.map(item=>
-     (item.indicators.map(indic=> <div  key={indic.id}> <label  value={indic.id}  className="labelNotChosen" onClick={(e) => this.onC(e, indic.id)} >{indic.name}</label> </div>))
+     (item.indicators.map(indic=> <div  key={indic.id}> <label  value={indic.id}  className="labelNotChosen, indicators" onClick={(e) => this.onC(e, indic.id)} >{indic.name}</label> </div>))
     )
 
     const indicatorCategories = contentIndicators.map(item=><h1 key={item.id}>{item.name}</h1>)
@@ -240,17 +243,9 @@ class Region extends Component {
            </span>  
           </Col>
           <Col xs={12}  md={5}   className='Middle'>
-            <h1> Graph here </h1>
+            
+        <div id="container" Middle col-md-5 col-xs-12></div>
            
-    
-            <button type="button" className="Graph1">Graph1</button>
-            
-            
-            <button type="button" className="Graph2">Graph2</button>
-
-            <button type="button" className="Graph3">Graph3</button>
-
-            <button type="button" className="Graph4">Graph4</button>
           </Col>
         
           <Col xs={12}  md={3}   className='Right'>
@@ -260,11 +255,85 @@ class Region extends Component {
            </ul> 
            </Col> 
           </Row>
-          {/*  <button onClick={() => this.findElementsByClassName("labelChosen")}> click me! </button>
-                   */}
         </Grid>
       )
     }
   }
 
-  export default Scenario
+  class Graph extends Component {
+    constructor(props) {
+      super(props);
+  
+      this.state = {
+        valuesGraph : []
+        };
+
+        this.updateGraph = this.updateGraph.bind(this);
+        this.refreshGraph = this.refreshGraph.bind(this);
+
+    }
+  
+    componentDidMount() {
+      this.Graph();   
+    }
+  
+    Graph() {
+    }
+
+    updateGraph(arrayValues) {
+      this.setState( { valuesGraph : arrayValues[0].values }, () => {this.refreshGraph()});
+    }
+
+    refreshGraph() {
+      //console.log(this.state.valuesGraph)
+      var arrayResult = []
+
+      var scenariosAccepted = []
+      var periodsAccepted = []
+      var indicatorsAccepted = []      
+
+      var scenariosArray = document.getElementsByClassName('scenarios')
+      var periodsArray = document.getElementsByClassName('periods')
+      var indicatorsArray = document.getElementsByClassName('indicators')
+
+      
+      console.log(arrayResult)
+    }
+
+    render() {
+      $(function () { 
+        var myChart = Highcharts.chart('container', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Fruit Consumption'
+            },
+            xAxis: {
+                categories: ['Apples', 'Bananas', 'Oranges']
+            },
+            yAxis: {
+                title: {
+                    text: 'Fruit eaten'
+                }
+            },
+            series: [{
+                name: 'Jane',
+                data: [1, 0, 4]
+            }, {
+                name: 'John',
+                data: [5, 7, 3]
+            }]
+        });
+    });
+  
+      return (
+
+
+           <Scenario updateGraphValues={this.updateGraph}/>
+           
+      )
+    }
+  }
+
+  export default Graph

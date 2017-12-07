@@ -33,8 +33,8 @@ function getLangString()
         }else{
         strings = langStringEN;
         }
-        console.log(lang)
-        console.log(strings.Area)
+        //console.log(lang)
+        //console.log(strings.Area)
     
         return strings;
 }
