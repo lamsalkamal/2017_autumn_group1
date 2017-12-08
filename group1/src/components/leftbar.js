@@ -7,6 +7,9 @@ import $ from 'jquery';
 
 var Highcharts = require('highcharts');
 
+require('highcharts-more')
+
+
 // Load module after Highcharts is loaded
 require('highcharts/modules/exporting')(Highcharts);
 
@@ -266,11 +269,13 @@ class Region extends Component {
       super(props);
   
       this.state = {
+        valuesArray : [],
         valuesGraph : []
         };
 
         this.updateGraph = this.updateGraph.bind(this);
-        this.refreshGraph = this.refreshGraph.bind(this);
+        this.refreshValues = this.refreshValues.bind(this);
+        this.createGraph = this.createGraph.bind(this);
 
     }
   
@@ -282,11 +287,11 @@ class Region extends Component {
     }
 
     updateGraph(arrayValues) {
-      this.setState( { valuesGraph : arrayValues[0].values }, () => {this.refreshGraph()});
+      this.setState( { valuesArray : arrayValues[0].values }, () => {this.refreshValues()});
     }
 
-    refreshGraph() {
-      //console.log(this.state.valuesGraph)
+    refreshValues() {
+      console.log(this.state.valuesArray)
       var arrayResult = []
 
       var scenariosAccepted = []
@@ -298,45 +303,91 @@ class Region extends Component {
         scenariosAccepted.push(scenariosArray[i].attributes.getNamedItem("value").nodeValue)
       }
       var periodsArray = document.getElementsByClassName('labelChosen, periods')
-      for(var i=0; i<periodsArray.length; i++) { 
-        periodsAccepted.push(periodsArray[i].attributes.getNamedItem("value").nodeValue)
+      for(var j=0; j<periodsArray.length; j++) { 
+        periodsAccepted.push(periodsArray[j].attributes.getNamedItem("value").nodeValue)
       }
       var indicatorsArray = document.getElementsByClassName('labelChosen, indicators')
-      for(var i=0; i<indicatorsArray.length; i++) { 
-        indicatorsAccepted.push(periodsArray[i].attributes.getNamedItem("value").nodeValue)
+      for(var z=0; z<indicatorsArray.length; z++) { 
+        indicatorsAccepted.push(indicatorsArray[z].attributes.getNamedItem("value").nodeValue)
       }
       
-      this.state.valuesGraph.forEach(function(element) {
-          console.log(element)
+      this.state.valuesArray.forEach(function(element) {
+         if(scenariosAccepted.includes(element.scenarioId.toString()) && periodsAccepted.includes(element.timePeriodId.toString()) && indicatorsAccepted.includes(element.indicatorId.toString()) ) {
+            arrayResult.push(element)
+         }
       })
+
+      this.setState( { valuesGraph : arrayResult }, () => {this.createGraph(1)});
+    }
+
+    createGraph(value) {
+      var myChart;
+
+      switch(value) {
+          case 1 : 
+                  myChart = Highcharts.chart('container', {
+                    
+                        chart: {
+                            polar: true
+                        },
+                    
+                        title: {
+                            text: 'Highcharts Polar Chart'
+                        },
+                    
+                        pane: {
+                            startAngle: 0,
+                            endAngle: 360
+                        },
+                    
+                        xAxis: {
+                            tickInterval: 45,
+                            min: 0,
+                            max: 360,
+                            labels: {
+                                formatter: function () {
+                                    return this.value + '°';
+                                }
+                            }
+                        },
+                    
+                        yAxis: {
+                            min: 0
+                        },
+                    
+                        plotOptions: {
+                            series: {
+                                pointStart: 0,
+                                pointInterval: 45
+                            },
+                            column: {
+                                pointPadding: 0,
+                                groupPadding: 0
+                            }
+                        },
+                    
+                        series: [{
+                            type: 'column',
+                            name: 'Column',
+                            data: [8, 7, 6, 5, 4, 3, 2, 1],
+                            pointPlacement: 'between'
+                        }, {
+                            type: 'line',
+                            name: 'Line',
+                            data: [1, 2, 3, 4, 5, 6, 7, 8]
+                        }, {
+                            type: 'area',
+                            name: 'Area',
+                            data: [1, 8, 2, 7, 3, 6, 4, 5]
+                        }]
+                    });
+                break;
+          default:
+
+      }
     }
 
     render() {
-      $(function () { 
-        var myChart = Highcharts.chart('container', {
-            chart: {
-                type: 'bar'
-            },
-            title: {
-                text: 'Fruit Consumption'
-            },
-            xAxis: {
-                categories: ['Apples', 'Bananas', 'Oranges']
-            },
-            yAxis: {
-                title: {
-                    text: 'Fruit eaten'
-                }
-            },
-            series: [{
-                name: 'Jane',
-                data: [1, 0, 4]
-            }, {
-                name: 'John',
-                data: [5, 7, 3]
-            }]
-        });
-    });
   
       return (
 
