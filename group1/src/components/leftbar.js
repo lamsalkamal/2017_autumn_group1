@@ -3,11 +3,12 @@ import apiData from './Data/getData'
 import getStrings from './Data/langString'
 import {Row,Grid,Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import $ from 'jquery'; 
+//import $ from 'jquery'; 
 
+//import 'highcharts-exporting';
+import HighchartsMore from 'highcharts-more'
 var Highcharts = require('highcharts');
-
-require('highcharts-more')
+HighchartsMore(Highcharts)
 
 
 // Load module after Highcharts is loaded
@@ -194,29 +195,25 @@ class Region extends Component {
   
     render() {
      const contentScenarios = this.state.scenariosA.length>0 ? this.state.scenariosA[0].scenarios : []
-     const scenarios = contentScenarios.map(item=> <div key={item.id}> <label id={item.name} value={item.id} className="labelNotChosen, scenarios" onClick={(e) => this.onC(e, item.id)} >{item.description} </label> </div>)
+     const scenarios = contentScenarios.map(item=> <div key={item.id}> <label id={item.name} value={item.id} className="labelNotChosen scenarios" onClick={(e) => this.onC(e, item.id)} >{item.description} </label> </div>)
 
      const contentDates = this.state.scenariosA.length>0 ? this.state.scenariosA[0].timePeriods : []
-     const periods = contentDates.map(item=> <div key={item.id}> <label  id={item.yearStart} value={item.id} className="labelNotChosen, periods" onClick={(e) => this.onC(e, item.id)}>{item.yearStart} - {item.yearEnd}  </label></div>)
+     const periods = contentDates.map(item=> <div key={item.id}> <label  id={item.yearStart} value={item.id} className="labelNotChosen periods" onClick={(e) => this.onC(e, item.id)}>{item.yearStart} - {item.yearEnd}  </label></div>)
   
 
      const contentIndicators = this.state.scenariosA.length>0 ? this.state.scenariosA[0].indicatorCategories : []
 
      //console.log(contentIndicators)
      const indicatorsArray = contentIndicators.map(item=>
-     (item.indicators.map(indic=> <div  key={indic.id}> <label  value={indic.id}  className="labelNotChosen, indicators" onClick={(e) => this.onC(e, indic.id)} >{indic.name}</label> </div>))
+     (item.indicators.map(indic=> <div  key={indic.id}> <label  value={indic.id}  className="labelNotChosen indicators" onClick={(e) => this.onC(e, indic.id)} >{indic.name}</label> </div>))
     )
 
     const indicatorCategories = contentIndicators.map(item=><h1 key={item.id}>{item.name}</h1>)
 
-    Array.prototype.insert = function ( index, item ) {
-      this.splice( index, 0, item );
-    };
-
     var count = 0
     var numbers = 0
     indicatorsArray.forEach(function(element) {
-        indicatorsArray.insert(count, indicatorCategories[numbers])
+        indicatorsArray.splice(count, 0, indicatorCategories[numbers])
         count+=2
         numbers++
     });
@@ -291,22 +288,21 @@ class Region extends Component {
     }
 
     refreshValues() {
-      console.log(this.state.valuesArray)
       var arrayResult = []
 
       var scenariosAccepted = []
       var periodsAccepted = []
       var indicatorsAccepted = []      
 
-      var scenariosArray = document.getElementsByClassName('labelChosen, scenarios')
+      var scenariosArray = document.getElementsByClassName('labelChosen scenarios')
       for(var i=0; i<scenariosArray.length; i++) { 
         scenariosAccepted.push(scenariosArray[i].attributes.getNamedItem("value").nodeValue)
       }
-      var periodsArray = document.getElementsByClassName('labelChosen, periods')
+      var periodsArray = document.getElementsByClassName('labelChosen periods')
       for(var j=0; j<periodsArray.length; j++) { 
         periodsAccepted.push(periodsArray[j].attributes.getNamedItem("value").nodeValue)
       }
-      var indicatorsArray = document.getElementsByClassName('labelChosen, indicators')
+      var indicatorsArray = document.getElementsByClassName('labelChosen indicators')
       for(var z=0; z<indicatorsArray.length; z++) { 
         indicatorsAccepted.push(indicatorsArray[z].attributes.getNamedItem("value").nodeValue)
       }
@@ -321,66 +317,53 @@ class Region extends Component {
     }
 
     createGraph(value) {
-      var myChart;
+      
 
       switch(value) {
           case 1 : 
-                  myChart = Highcharts.chart('container', {
-                    
+                      var options = {
                         chart: {
+                            renderTo: 'container',
                             polar: true
                         },
-                    
                         title: {
-                            text: 'Highcharts Polar Chart'
+                          text: 'My title'
                         },
-                    
                         pane: {
-                            startAngle: 0,
-                            endAngle: 360
+                          startAngle: 0,
+                          endAngle: 360
                         },
-                    
                         xAxis: {
-                            tickInterval: 45,
-                            min: 0,
-                            max: 360,
-                            labels: {
-                                formatter: function () {
-                                    return this.value + '°';
-                                }
-                            }
-                        },
-                    
+                          min: 0,
+                          max: 360
+                        },                    
                         yAxis: {
                             min: 0
                         },
-                    
                         plotOptions: {
-                            series: {
-                                pointStart: 0,
-                                pointInterval: 45
-                            },
-                            column: {
-                                pointPadding: 0,
-                                groupPadding: 0
-                            }
+                          series: {
+                              pointStart: 0
+                          },
+                          column: {
+                              pointPadding: 0,
+                              groupPadding: 0
+                          }
                         },
-                    
-                        series: [{
-                            type: 'column',
-                            name: 'Column',
-                            data: [8, 7, 6, 5, 4, 3, 2, 1],
-                            pointPlacement: 'between'
-                        }, {
-                            type: 'line',
-                            name: 'Line',
-                            data: [1, 2, 3, 4, 5, 6, 7, 8]
-                        }, {
-                            type: 'area',
-                            name: 'Area',
-                            data: [1, 8, 2, 7, 3, 6, 4, 5]
-                        }]
-                    });
+                    };
+                    options.xAxis.tickInterval = Math.round(360 / (this.state.valuesGraph.length));   
+                    options.plotOptions.series.pointInterval = Math.round(360 / (this.state.valuesGraph.length));                   
+                    var myChart = new Highcharts.Chart(options);
+                    var valuesA = []
+                    this.state.valuesGraph.forEach(function(element) {
+                     valuesA.push(element.value)
+                   })
+                   myChart.addSeries({
+                    type: 'column',
+                    name: 'Column',
+                    data: valuesA,
+                    pointPlacement: 'between'
+                   });
+                   myChart.redraw();
                 break;
           default:
 
@@ -391,8 +374,7 @@ class Region extends Component {
   
       return (
 
-
-           <Scenario updateGraphValues={this.updateGraph} updateGraphNoValues={this.refreshGraph}/>
+           <Scenario updateGraphValues={this.updateGraph} updateGraphNoValues={this.refreshValues}/>
            
       )
     }

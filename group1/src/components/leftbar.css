@@ -8,11 +8,11 @@
     margin-bottom: 0.1em;
 }
 
-.labelChosen{
-    color:red
-}
 .labelNotChosen{
     color:black
+}
+.labelChosen{
+    color:red
 }
 
 .test {
@@ -102,7 +102,6 @@ margin: 1px;
 #indicatorId {
     font-size: 100% ;
     background: lightseagreen;
-    color:black;
     border-radius: 30px;
     padding:7px;
     text-align: left;
