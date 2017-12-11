@@ -14,38 +14,21 @@ class Scenario extends Component {
   
           this.updateScenarioCollectionId = this.updateScenarioCollectionId.bind(this);        
           this.onC = this.onC.bind(this);
-      }*/
-    
-      componentDidMount() {
-        this.Scenario();   
-      }
-    
-      Scenario() {
-      }
-  
-      onC(e, data) {
-        if (e.target.className.indexOf("labelChosen")> -1) {
-          e.target.className = e.target.className.replace("labelChosen", "labelNotChosen")
-        }
-        else {
-          e.target.className = e.target.className.replace("labelNotChosen", "labelChosen")
-        }
-        //this.props.updateGraphNoValues()
-      }
+      }*/      
     
       render() {
        const contentScenarios = this.props.scenariosA.length>0 ? this.props.scenariosA[0].scenarios : []
-       const scenarios = contentScenarios.map(item=> <div key={item.id}> <label id={item.name} value={item.id} className="labelNotChosen, scenarios" onClick={(e) => this.props.onC(e, item.id)} >{item.description} </label> </div>)
+       const scenarios = contentScenarios.map(item=> <div key={item.id}> <label id={item.name} value={item.id} className="labelNotChosen scenarios" onClick={(e) => this.props.onC(e, item.id)} >{item.description} </label> </div>)
   
        const contentDates = this.props.scenariosA.length>0 ? this.props.scenariosA[0].timePeriods : []
-       const periods = contentDates.map(item=> <div key={item.id}> <label  id={item.yearStart} value={item.id} className="labelNotChosen, periods" onClick={(e) => this.props.onC(e, item.id)}>{item.yearStart} - {item.yearEnd}  </label></div>)
+       const periods = contentDates.map(item=> <div key={item.id}> <label  id={item.yearStart} value={item.id} className="labelNotChosen periods" onClick={(e) => this.props.onC(e, item.id)}>{item.yearStart} - {item.yearEnd}  </label></div>)
     
   
        const contentIndicators = this.props.scenariosA.length>0 ? this.props.scenariosA[0].indicatorCategories : []
   
        //console.log(contentIndicators)
        const indicatorsArray = contentIndicators.map(item=>
-       (item.indicators.map(indic=> <div  key={indic.id}> <label  value={indic.id}  className="labelNotChosen, indicators" onClick={(e) => this.props.onC(e, indic.id)} >{indic.name}</label> </div>))
+       (item.indicators.map(indic=> <div  key={indic.id}> <label  value={indic.id}  className="labelNotChosen indicators" onClick={(e) => this.props.onC(e, indic.id)} >{indic.name}</label> </div>))
       )
   
       const indicatorCategories = contentIndicators.map(item=><h1 key={item.id}>{item.name}</h1>)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import {Row,Grid,Col} from 'react-bootstrap'
+import {Row,Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import getStrings from './langString.js'
 
@@ -11,7 +11,7 @@ class Region extends Component {
         const regions = this.props.regions.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
         //console.log(regions)
         const scenariosCollection = this.props.scenariosCollection.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
-        console.log(scenariosCollection)
+        //console.log(scenariosCollection)
         return (
           <Col xs={12}  md={12}>
           <Row>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Row,Grid,Col} from 'react-bootstrap'
+import {Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import getStrings from './langString.js'
 

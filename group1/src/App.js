@@ -10,6 +10,16 @@ import Graph from './components/graph.js'
 import Scenario from './components/scenario.js'
 import RegionLevel from './components/regionlevel.js'
 import Region from './components/region.js'
+//import $ from 'jquery'
+
+import HighchartsMore from 'highcharts-more'
+
+var Highcharts = require('highcharts');
+HighchartsMore(Highcharts)
+
+
+// Load module after Highcharts is loaded
+require('highcharts/modules/exporting')(Highcharts);
 
 class App extends Component {
   constructor(props){
@@ -18,19 +28,31 @@ class App extends Component {
     this.state = {
       regionsLevels : [],
       lang : true,
+
       regions : [],
       scenariosCollection : [],
       regionId : "1",
-      scenariosA : []
+
+      scenariosA : [],
+
+      valuesArray : [],
+      valuesGraph : []
     }
 
       this.regionLevel = this.regionLevel.bind(this);
       this.handleRegionUpdate = this.handleRegionUpdate.bind(this);
       this.change = this.change.bind(this);
+
       this.changeRegion = this.changeRegion.bind(this);
       this.langChange = this.langChange.bind(this);
       this.changeScenarioCollectionId = this.changeScenarioCollectionId.bind(this);
-      this.updateScenarioCollectionId = this.updateScenarioCollectionId.bind(this);        
+      
+      this.updateScenarioCollectionId = this.updateScenarioCollectionId.bind(this);  
+      this.onC = this.onC.bind(this);     
+
+      this.updateGraph = this.updateGraph.bind(this);
+      this.refreshValues = this.refreshValues.bind(this);
+      this.createGraph = this.createGraph.bind(this);
       
     };
 
@@ -117,10 +139,110 @@ class App extends Component {
     updateScenarioCollectionId(scenarioCollectionId, regionId) {
       apiData.getScenarioCollection(scenarioCollectionId, regionId).then(result => {
         this.setState( { scenariosA : result }, () => {
-          //this.updateGraph(this.state.scenariosA)       
+          this.updateGraph(this.state.scenariosA)       
       })
     })
   }
+  onC(e, data) {
+    if (e.target.className.indexOf("labelChosen")> -1) {
+      e.target.className = e.target.className.replace("labelChosen", "labelNotChosen")
+    }
+    else {
+      e.target.className = e.target.className.replace("labelNotChosen", "labelChosen")
+    }
+    this.refreshValues()
+  }
+
+   //---Graph--
+  updateGraph(arrayValues) {
+    this.setState( { valuesArray : arrayValues[0].values }, () => {this.refreshValues()});
+  }
+
+  refreshValues() {
+    var arrayResult = []
+
+    var scenariosAccepted = []
+    var periodsAccepted = []
+    var indicatorsAccepted = []      
+
+    var scenariosArray = document.getElementsByClassName('labelChosen scenarios')
+    for(var i=0; i<scenariosArray.length; i++) { 
+      scenariosAccepted.push(scenariosArray[i].attributes.getNamedItem("value").nodeValue)
+    }
+    var periodsArray = document.getElementsByClassName('labelChosen periods')
+    for(var j=0; j<periodsArray.length; j++) { 
+      periodsAccepted.push(periodsArray[j].attributes.getNamedItem("value").nodeValue)
+    }
+    var indicatorsArray = document.getElementsByClassName('labelChosen indicators')
+    for(var z=0; z<indicatorsArray.length; z++) { 
+      indicatorsAccepted.push(indicatorsArray[z].attributes.getNamedItem("value").nodeValue)
+    }
+    
+    this.state.valuesArray.forEach(function(element) {
+       if(scenariosAccepted.includes(element.scenarioId.toString()) && periodsAccepted.includes(element.timePeriodId.toString()) && indicatorsAccepted.includes(element.indicatorId.toString()) ) {
+          arrayResult.push(element)
+       }
+    })
+
+    this.setState( { valuesGraph : arrayResult }, () => {this.createGraph(1)});
+  }
+
+  createGraph(value) {
+
+    //console.log(this.state.valuesArray)
+    
+
+    switch(value) {
+        case 1 : 
+                    var options = {
+                      chart: {
+                          renderTo: 'container',
+                          polar: true
+                      },
+                      title: {
+                        text: 'My title'
+                      },
+                      pane: {
+                        startAngle: 0,
+                        endAngle: 360
+                      },
+                      xAxis: {
+                        min: 0,
+                        max: 360
+                      },                    
+                      yAxis: {
+                          min: 0
+                      },
+                      plotOptions: {
+                        series: {
+                            pointStart: 0
+                        },
+                        column: {
+                            pointPadding: 0,
+                            groupPadding: 0
+                        }
+                      },
+                  };
+                  options.xAxis.tickInterval = Math.round(360 / (this.state.valuesGraph.length));   
+                  options.plotOptions.series.pointInterval = Math.round(360 / (this.state.valuesGraph.length));                   
+                  var myChart = new Highcharts.Chart(options);
+                  var valuesA = []
+                  this.state.valuesGraph.forEach(function(element) {
+                   valuesA.push(element.value)
+                 })
+                 myChart.addSeries({
+                  type: 'column',
+                  name: 'Column',
+                  data: valuesA,
+                  pointPlacement: 'between'
+                 });
+                 myChart.redraw();
+              break;
+        default:
+
+    }
+  }
+
   
   render() {
     return (
@@ -142,8 +264,10 @@ class App extends Component {
                 />
         <Scenario scenariosA = { this.state.scenariosA }
                   updateScenarioCollectionId = { this.updateScenarioCollectionId }
+                  onC = {this.onC}
                   />
-        <Graph 
+        <Graph  updateGraphValues={this.updateGraph}
+                createGraph = {this.createGraph}
                />
         
       </div>   
