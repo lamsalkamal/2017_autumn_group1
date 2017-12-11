@@ -9,15 +9,17 @@ let langStringEN = {
         Scenariocollection : "Scenariocollection",
         SCENARIOS : "SCENARIOS",
         PERIODS : "PERIODS",
-        INDICATORS : "INDICATORS"
+        INDICATORS : "INDICATORS",
+        ForestIndicator: "Forest Indicator"
     }
-let  langStringFI = {
+let langStringFI = {
         Regionlevel : "Aluetaso",
         Area : "Alue",
         Scenariocollection: "Skenaariokokoelma",
         SCENARIOS : "SKENAARIOT",
         PERIODS : "AJANKOHTA",
-        INDICATORS : "INDIKATTOREIDEN VALINTA"
+        INDICATORS : "INDIKATTOREIDEN VALINTA",
+        ForestIndicator: "Metsämittari"
     } 
 
 
@@ -33,10 +35,8 @@ function getLangString()
         }else{
         strings = langStringEN;
         }
-        //console.log(lang)
-        //console.log(strings.Area)
     
         return strings;
 }
 
-export default {chooseLang , strings , getLangString}
+export default {chooseLang , strings , getLangString};
