@@ -10,7 +10,8 @@ let langStringEN = {
         SCENARIOS : "SCENARIOS",
         PERIODS : "PERIODS",
         INDICATORS : "INDICATORS",
-        ForestIndicator: "Forest Indicator"
+        ForestIndicator: "Forest Indicator",
+        SendFeedback : "Send Feedback"
     }
 let langStringFI = {
         Regionlevel : "Aluetaso",
@@ -19,7 +20,8 @@ let langStringFI = {
         SCENARIOS : "SKENAARIOT",
         PERIODS : "AJANKOHTA",
         INDICATORS : "INDIKATTOREIDEN VALINTA",
-        ForestIndicator: "Metsämittari"
+        ForestIndicator: "Metsämittari",
+        SendFeedback : "Anna palautetta"
     } 
 
 

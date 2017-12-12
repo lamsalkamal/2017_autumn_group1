@@ -10,6 +10,7 @@ import Graph from './components/graph.js'
 import Scenario from './components/scenario.js'
 import RegionLevel from './components/regionlevel.js'
 import Region from './components/region.js'
+import FeedBack from './components/feedBack.js'
 //import $ from 'jquery'
 
 import HighchartsMore from 'highcharts-more'
@@ -269,8 +270,9 @@ class App extends Component {
         <Graph  updateGraphValues={this.updateGraph}
                 createGraph = {this.createGraph}
                />
-        
-      </div>   
+        <FeedBack/>
+      </div>
+      
     );
   }
 }
