@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import './components/leftbar.css';
+import './App.css';
 
 //import Body from './components/body.js'
 //import {Row,Grid,Col ,Button } from 'react-bootstrap'
@@ -53,7 +54,7 @@ class App extends Component {
 
       this.updateGraph = this.updateGraph.bind(this);
       this.refreshValues = this.refreshValues.bind(this);
-      this.createGraph = this.createGraph.bind(this);
+      this.createGraphs = this.createGraphs.bind(this);
       
     };
 
@@ -170,6 +171,8 @@ class App extends Component {
     for(var i=0; i<scenariosArray.length; i++) { 
       scenariosAccepted.push(scenariosArray[i].attributes.getNamedItem("value").nodeValue)
     }
+    console.log(scenariosAccepted)
+
     var periodsArray = document.getElementsByClassName('labelChosen periods')
     for(var j=0; j<periodsArray.length; j++) { 
       periodsAccepted.push(periodsArray[j].attributes.getNamedItem("value").nodeValue)
@@ -185,19 +188,25 @@ class App extends Component {
        }
     })
 
-    this.setState( { valuesGraph : arrayResult }, () => {this.createGraph(1)});
+    this.setState( { valuesGraph : arrayResult }, () => {this.createGraphs()});
   }
 
-  createGraph(value) {
+  createGraphs() {
 
-    //console.log(this.state.valuesArray)
-    
+   // console.log(this.state.valuesGraph)
+   document.getElementById("container1").innerHTML = "";
+   document.getElementById("container2").innerHTML = "";
 
-    switch(value) {
-        case 1 : 
+   var printBut = document.getElementById("printbut");
+   var exportPNG = document.getElementById("exportpng");
+   document.getElementById("container3").innerHTML = "";
+
+
+
+     //   case 1 : 
                     var options = {
                       chart: {
-                          renderTo: 'container',
+                          renderTo: 'container1',
                           polar: true
                       },
                       title: {
@@ -238,14 +247,75 @@ class App extends Component {
                   pointPlacement: 'between'
                  });
                  myChart.redraw();
-              break;
-        default:
+            
 
-    }
+
+    //    case 2 : 
+              document.getElementById("container2").innerHTML = "container2";
+              //ANOTHER GRAPH HERE
+             
+
+
+      //  case 3 : 
+            // document.getElementById("container3").innerHTML = "";
+                 var tbl;
+              tbl  = document.createElement('table');
+              tbl.id = "tableIdValues"
+              tbl.style.width  = '500px';
+              tbl.style.border = '1px solid black';
+
+              var trFirst = tbl.insertRow();
+              trFirst.style.border = '1px solid black';
+              var tdFirst = trFirst.insertCell();
+              tdFirst.appendChild(document.createTextNode(getStrings.getLangString().INDICATORS));
+              tdFirst.style.border = '1px solid black';
+
+              var scenariosArray = document.getElementsByClassName('labelChosen scenarios')
+              for(var i=0; i<scenariosArray.length; i++) { 
+                var tds = trFirst.insertCell();
+                tds.style.border = '1px solid black';
+                tds.className = "vertical"
+                tds.appendChild(document.createTextNode(scenariosArray[i].innerHTML));
+              }
+
+              var indicatorsAccepted = []
+              var indicartorsAcceptedNames = []
+              var indicatorsArray = document.getElementsByClassName('labelChosen indicators')
+              for(var z=0; z<indicatorsArray.length; z++) { 
+                indicatorsAccepted.push(indicatorsArray[z].attributes.getNamedItem("value").nodeValue)
+                console.log(indicartorsAcceptedNames.push(indicatorsArray[z].innerHTML))
+              }
+            
+
+              for(var j = 0; j < indicatorsAccepted.length; j++) {
+                  var tr = tbl.insertRow();
+                  tr.style.border = '1px solid black';
+                  var td = tr.insertCell();
+                  td.appendChild(document.createTextNode(indicartorsAcceptedNames[j]));
+                  this.state.valuesGraph.forEach(function(elem) {  
+                        if( parseInt(elem.indicatorId,10) === parseInt(indicatorsAccepted[j],10)) {
+                          var td = tr.insertCell();
+                          td.style.width  = '40px';
+                          td.style.border = '1px solid black';
+                          td.appendChild(document.createTextNode(elem.value));
+                        }
+                   });
+                 // oldIndicator = element.indicatorId
+              }
+          
+              document.getElementById("container3").appendChild(tbl);
+              document.getElementById("container3").appendChild(printBut);
+              document.getElementById("container3").appendChild(exportPNG);
+              
+              
+
+
+    
   }
 
   
   render() {
+
     return (
 
       <div className="App">
@@ -268,8 +338,9 @@ class App extends Component {
                   onC = {this.onC}
                   />
         <Graph  updateGraphValues={this.updateGraph}
-                createGraph = {this.createGraph}
+                createGraphs = {this.createGraphs}
                />
+       
         <FeedBack/>
       </div>
       

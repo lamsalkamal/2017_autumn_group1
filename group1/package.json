@@ -7,6 +7,7 @@
     "bootstrap": "^4.0.0-beta.2",
     "highcharts": "^6.0.3",
     "highcharts-more": "^0.1.2",
+    "html2canvas": "^1.0.0-alpha.4",
     "jquery": "^3.2.1",
     "react": "^16.1.1",
     "react-bootstrap": "^0.31.5",
