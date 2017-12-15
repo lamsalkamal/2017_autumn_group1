@@ -4,7 +4,7 @@ import './components/leftbar.css';
 import './App.css';
 
 //import Body from './components/body.js'
-//import {Row,Grid,Col ,Button } from 'react-bootstrap'
+import {Row,Grid,Col ,Button } from 'react-bootstrap'
 import getStrings from './components/langString.js'
 import apiData from './Data/getData.js'
 import Graph from './components/graph.js'
@@ -12,7 +12,7 @@ import Scenario from './components/scenario.js'
 import RegionLevel from './components/regionlevel.js'
 import Region from './components/region.js'
 import FeedBack from './components/feedBack.js'
-import Transfer from './components/choiceTransfer.js'
+import ChoiceTransfer from './components/choiceTransfer.js'
 import Language from './components/language.js'
 //import $ from 'jquery'
 //import Header from './components/Header.js'
@@ -334,18 +334,18 @@ class App extends Component {
     var scenariosArray = document.getElementsByClassName('labelChosen scenarios')
 
     var DDArray = new Array(indicatorsAcceptedHTML.length);
-    //console.log(this.state.valuesGraph)
+    console.log(this.state.valuesGraph)
     for(var g = 0; g < DDArray.length; g++) {
       DDArray[g] = [];
       this.state.valuesGraph.forEach(function (element) {
-        if(element.scenarioId === scenariosArray[g].attributes.getNamedItem("value").nodeValue) {
+        if(element.indicatorId === parseInt(indicatorsArray[g].attributes.getNamedItem("value").nodeValue,10)) {
           console.log("pushing")
           DDArray[g].push(element.value)
         }
       })
     }
 
-    //console.log(DDArray)
+    console.log(DDArray)
 
     
     myChart2.addSeries({
@@ -421,6 +421,11 @@ class App extends Component {
     return (
 
       <div className="App">
+
+<Grid fluid id="layout-content" className="marginPage">
+<Row> 
+
+<Col xs={12} md={3} className='left'>
         <Language langChange={this.langChange} />
         <RegionLevel regionsLevels={this.state.regionsLevels}
           regionLevel={this.regionLevel}
@@ -435,21 +440,26 @@ class App extends Component {
           changeScenarioCollectionId={this.changeScenarioCollectionId}
           updateScenarioCollectionId={this.updateScenarioCollectionId}
         />
+        </Col>
+  </Row>  
         <Scenario scenariosA={this.state.scenariosA}
           updateScenarioCollectionId={this.updateScenarioCollectionId}
           onC={this.onC}
         />
+    
         <Graph updateGraphValues={this.updateGraph}
           createGraphs={this.createGraphs}
         />
 
         <FeedBack />
-        <Transfer regionId={this.state.regionId}
+        <ChoiceTransfer regionId={this.state.regionId}
           scenarioId={this.state.scenarioId}
           scenariosA={this.state.scenariosA}
         />
-      </div>
+</Grid>
 
+
+</div>
     );
   }
 }

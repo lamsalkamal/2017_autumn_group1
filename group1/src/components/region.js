@@ -13,10 +13,7 @@ class Region extends Component {
         const scenariosCollection = this.props.scenariosCollection.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
         //console.log(scenariosCollection)
         return (
-          <Col xs={12}  md={3}>
-          <Row>
-
-          </Row>
+          <div>
           <span>    
              <h4> {getStrings.getLangString().Area} </h4>
              <select id="regionId" onChange={this.props.changeRegion}>
@@ -30,8 +27,8 @@ class Region extends Component {
                 {scenariosCollection}
              </select>
              <abbr title={getStrings.getLangString().ScenarioCollectionDesc}>[?]</abbr>
-             </span>          
-          </Col>
+             </span>  
+             </div>
         );
       }
 }

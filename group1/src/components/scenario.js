@@ -46,13 +46,12 @@ class Scenario extends Component {
       });
     
         return (
-          <Grid fluid id="layout-content" className="marginPage">
 
-            <Row>
-                <Col xs={12}  md={3}  className='left'>
-               <Row>      
-                         
-               </Row>
+          <div>
+          <Row>
+          <Col xs={12} md={3} className='left'>
+          
+
                 <span className='paddBottom'>
              <h4> { getStrings.getLangString().SCENARIOS} 
              <abbr title={getStrings.getLangString().ScenarioDesc}>[?]</abbr> </h4>  
@@ -67,22 +66,19 @@ class Scenario extends Component {
                 {periods}
              </ul>
              </span>  
-            </Col>
-            <Col xs={12}  md={5}  className='Middle'>
               
+              
+            </Col>
+            </Row>
           <div id="container"></div>
              
-            </Col>
           
-            <Col xs={12}  md={3}   className='Right'>
               <h4> { getStrings.getLangString().INDICATORS} 
               <abbr title={getStrings.getLangString().IndicatorDesc}>[?]</abbr> </h4>
              <ul id="indicatorId">
                 {indicatorsArray}
              </ul>
-             </Col> 
-            </Row>
-          </Grid>
+</div>
         )
       }
 }
