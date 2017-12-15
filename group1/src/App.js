@@ -333,25 +333,34 @@ class App extends Component {
     })*/
     var scenariosArray = document.getElementsByClassName('labelChosen scenarios')
 
-    var DDArray = new Array(indicatorsAcceptedHTML.length);
-    console.log(this.state.valuesGraph)
+    var DDArray = new Array(scenariosArray.length);
+    //console.log(this.state.valuesGraph)
     for(var g = 0; g < DDArray.length; g++) {
       DDArray[g] = [];
       this.state.valuesGraph.forEach(function (element) {
-        if(element.indicatorId === parseInt(indicatorsArray[g].attributes.getNamedItem("value").nodeValue,10)) {
-          console.log("pushing")
+        if(element.scenarioId === parseInt(scenariosArray[g].attributes.getNamedItem("value").nodeValue,10)) {
           DDArray[g].push(element.value)
         }
       })
     }
 
-    console.log(DDArray)
+    var scenariosArrayHTML = []
+    for (var e = 0; e < scenariosArray.length; e++) {
+      scenariosArrayHTML.push(scenariosArray[e].innerHTML)
+    }
 
-    
-    myChart2.addSeries({
-      type: 'column',
-      data: [1]
-    });
+    //console.log(this.state.valuesGraph)
+    //console.log(DDArray)
+    console.log(DDArray.length)
+    for(var numb = 0; numb < DDArray.length; numb++) {
+      
+    console.log(DDArray[numb])
+      myChart2.addSeries({
+        type: 'column',
+        name: scenariosArrayHTML[numb],
+        data: DDArray[numb]
+      });
+    }
 
     if (periodsArray.length > 0) {
       myChart2.setTitle({ text: textSelected + " " + periodsArray[0].innerHTML });
