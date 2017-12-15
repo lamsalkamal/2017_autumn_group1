@@ -54,13 +54,15 @@ class Scenario extends Component {
                          
                </Row>
                 <span className='paddBottom'>
-             <h4> { getStrings.getLangString().SCENARIOS} </h4>
+             <h4> { getStrings.getLangString().SCENARIOS} 
+             <abbr title={getStrings.getLangString().ScenarioDesc}>[?]</abbr> </h4>  
               <ul id="scenarioId" >
                 {scenarios}
-             </ul>  
+             </ul>
              </span>
              <span>
-                           <h4> { getStrings.getLangString().PERIODS} </h4>
+                           <h4> { getStrings.getLangString().PERIODS} 
+                           <abbr title={getStrings.getLangString().TimeDesc}>[?]</abbr> </h4>
              <ul id="periodId" >
                 {periods}
              </ul>
@@ -73,10 +75,11 @@ class Scenario extends Component {
             </Col>
           
             <Col xs={12}  md={3}   className='Right'>
-              <h4> { getStrings.getLangString().INDICATORS} </h4>
+              <h4> { getStrings.getLangString().INDICATORS} 
+              <abbr title={getStrings.getLangString().IdicatorDesc}>[?]</abbr> </h4>
              <ul id="indicatorId">
                 {indicatorsArray}
-             </ul> 
+             </ul>
              </Col> 
             </Row>
           </Grid>

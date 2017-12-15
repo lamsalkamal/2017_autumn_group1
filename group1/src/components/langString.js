@@ -16,7 +16,12 @@ let langStringEN = {
         LanguageDesc : "Select the language to switch the interface's language",
         ScenarioCollectionDesc : "Finally you can select one of the scenario's collections",
         RegionDesc : "Then you take one of the region",
-        RegionlevelDesc : "First, select the region level"
+        RegionlevelDesc : "First, select the region level",
+        FeedbackDesc : "Send feedback via email",
+        MelatupaDesc : "Open Melatupa service with selected values",
+        TimeDesc : "Choose one time Period",
+        IndicatorDesc : "The maximum number of scenario–indicator combinations (chosen scenarios * chosen indicators) is 20",
+        ScenarioDesc : "The maximum number of scenario–indicator combinations (chosen scenarios * chosen indicators) is 20 "
 
     }
 let langStringFI = {
@@ -32,7 +37,12 @@ let langStringFI = {
         LanguageDesc : "Select the language to switch the interface's language",
         ScenarioCollectionDesc : "Valitse skenario",
         RegionDesc : "Sitten valitse haluamasi alue",
-        RegionlevelDesc : "Aluksi valitse haluamasi aluetaso"
+        RegionlevelDesc : "Aluksi valitse haluamasi aluetaso",
+        FeedbackDesc : "Lähetä palautetta sähköpostin kautta ",
+        MelatupaDesc : "Avaa Melatupa palvelu valituilla arvoilla",
+        TimeDesc : "Valitse yksi aikaväli",
+        IndicatorDesc : "Maksimi määrä skenaario-indikaattori yhdistelmiä (valitut skenaariot * valitut indikaattorit) on 20 ",
+        ScenarioDesc : "Maksimi määrä skenaario-indikaattori yhdistelmiä (valitut skenaariot * valitut indikaattorit) on 20 "
     } 
 
 

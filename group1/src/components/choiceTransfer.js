@@ -19,14 +19,17 @@ class choiceTransfer extends Component {
           scenariosAccepted.push(scenariosArray[i].attributes.getNamedItem("value").nodeValue)
         }
 
-        var lk = "lk=";
+        var ty = "&ty=";
         for(i = 0; i<scenariosAccepted.length; i++){
-            lk = lk + scenariosAccepted[i];
+            ty = ty + scenariosAccepted[i] +",";
+            if(i === scenariosAccepted.length -1){
+                ty = ty.slice(0, -1);
+            }
         }
 
         var ko = "&ko=" + this.props.regionId;
 
-        var ty = "&ty=" + this.props.scenarioId;
+        var lk = "lk=" + this.props.scenarioId;
 
         var periodsAccepted = [];
         var periodsArray = document.getElementsByClassName('labelChosen periods')
@@ -75,6 +78,7 @@ class choiceTransfer extends Component {
                 <a href= { this.setURl() } target="_blank" >
                     <button>{ getStrings.getLangString().Melatupa }</button>
                 </a>
+                <abbr title={getStrings.getLangString().MelatupaDesc}>[?]</abbr>
 
             </div>
         )
