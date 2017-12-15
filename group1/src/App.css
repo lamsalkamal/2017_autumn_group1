@@ -26,3 +26,8 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+table tr td.vertical {
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
+}

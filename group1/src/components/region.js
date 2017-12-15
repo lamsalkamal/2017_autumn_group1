@@ -22,12 +22,14 @@ class Region extends Component {
              <select id="regionId" onChange={this.props.changeRegion}>
                {regions}
              </select>   
+             <abbr title={getStrings.getLangString().RegionDesc}>[?]</abbr>
             </span>
             <span>
             <h4>{getStrings.getLangString().Scenariocollection}</h4>
              <select id="scenarioCollectionId" onChange={this.props.changeScenarioCollectionId}>  
                 {scenariosCollection}
              </select>
+             <abbr title={getStrings.getLangString().ScenarioCollectionDesc}>[?]</abbr>
              </span>          
           </Col>
         );

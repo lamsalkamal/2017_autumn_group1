@@ -18,7 +18,7 @@ class Scenario extends Component {
     
       render() {
        const contentScenarios = this.props.scenariosA.length>0 ? this.props.scenariosA[0].scenarios : []
-       const scenarios = contentScenarios.map(item=> <div key={item.id}> <label id={item.name} value={item.id} className="labelNotChosen scenarios" onClick={(e) => this.props.onC(e, item.id)} >{item.description} </label> </div>)
+       const scenarios = contentScenarios.map(item=> <div key={item.id}> <label id={item.shortName} value={item.id} className="labelNotChosen scenarios" onClick={(e) => this.props.onC(e, item.id)} >  {item.name}  </label>  <abbr title={item.description}> [?] </abbr> </div>)
   
        const contentDates = this.props.scenariosA.length>0 ? this.props.scenariosA[0].timePeriods : []
        const periods = contentDates.map(item=> <div key={item.id}> <label  id={item.yearStart} value={item.id} className="labelNotChosen periods" onClick={(e) => this.props.onC(e, item.id)}>{item.yearStart} - {item.yearEnd}  </label></div>)
