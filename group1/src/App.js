@@ -13,7 +13,7 @@ import RegionLevel from './components/regionlevel.js'
 import Region from './components/region.js'
 import FeedBack from './components/feedBack.js'
 //import $ from 'jquery'
-
+import Header from './components/Header.js'
 import HighchartsMore from 'highcharts-more'
 
 var Highcharts = require('highcharts');
@@ -319,6 +319,9 @@ class App extends Component {
     return (
 
       <div className="App">
+      <Header
+      />
+        
         <RegionLevel regionsLevels = { this.state.regionsLevels }
                      regionLevel = { this.regionLevel }
                      langChange = { this.langChange }

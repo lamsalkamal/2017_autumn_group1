@@ -6,10 +6,10 @@ import getStrings from './langString.js'
 class RegionLevel extends Component {
    
       render() {
-  
+
         const regionLevels = this.props.regionsLevels.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
         return (
-          <Col xs={12}  md={12} >
+          <Col xs={12}  md={3} >
           <span>         
           <b>Language</b>
           <select id="languageSelect" onChange={this.props.langChange}>

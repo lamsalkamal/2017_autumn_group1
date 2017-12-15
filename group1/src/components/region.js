@@ -13,9 +13,9 @@ class Region extends Component {
         const scenariosCollection = this.props.scenariosCollection.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
         //console.log(scenariosCollection)
         return (
-          <Col xs={12}  md={12}>
+          <Col xs={12}  md={3}>
           <Row>
-           
+
           </Row>
           <span>    
              <h4> {getStrings.getLangString().Area} </h4>

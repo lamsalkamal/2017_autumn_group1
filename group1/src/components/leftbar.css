@@ -4,8 +4,11 @@
    
 }
 .Header{
-    background: green;
-    margin-bottom: 0.1em;
+    background-color:green;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .labelNotChosen{
@@ -20,27 +23,33 @@
 }
 
 #regionLevelId {
-margin: 1px;
+    margin: 1px;
     border: 3px solid #4CAF50;
     font-size:.8em;
-    width:90%;
+    width:200px;
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
 
 
 #regionId {
  
-    border:3px solid #4CAF50;
-    font-size:0.8em;
-    border-radius: 3px;
-    width:90%;
+    margin: 1px;
+    border: 3px solid #4CAF50;
+    font-size:.8em;
+    width:200px;
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
 
 
 #scenarioCollectionId {
-    margin:1px;
-    border:3px solid #4CAF50;
-    font-size:0.8em;
-    width:90%;
+    margin: 1px;
+    border: 3px solid #4CAF50;
+    font-size:.8em;
+    width:200px;
+    margin-top: 1px;
+    margin-bottom: 1px;
 
 }
 .left{
