@@ -53,10 +53,17 @@ class choiceTransfer extends Component {
             }
             
         }
+        var melaTupaURL = "http://mela2.metla.fi/mela/_tupatest15/tupa/index.php?" + lk + ko + ty + ka + mj;
+        melaTupaURL = melaTupaURL.slice(0, -1);
 
-        //console.log(this.props.scenariosA)
+        var la = "&la=";
+        if(getStrings.lang === true){
+            la = la+"fi";
+        }else{
+            la = la+"en";
+        }
 
-        const melaTupaURL = "http://mela2.metla.fi/mela/_tupatest15/tupa/index.php?" + lk + ko + ty + ka + mj;
+         melaTupaURL = melaTupaURL + la;
         
         return melaTupaURL;
     }

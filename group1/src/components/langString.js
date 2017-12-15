@@ -31,7 +31,7 @@ let langStringFI = {
         Melatupa : "MELATupa Palvelu",
         LanguageDesc : "Select the language to switch the interface's language",
         ScenarioCollectionDesc : "Valitse skenario",
-        RegionDesc : "Sitten valitse haluamsi alue",
+        RegionDesc : "Sitten valitse haluamasi alue",
         RegionlevelDesc : "Aluksi valitse haluamasi aluetaso"
     } 
 
@@ -52,4 +52,4 @@ function getLangString()
         return strings;
 }
 
-export default {chooseLang , strings , getLangString};
+export default {chooseLang , strings , getLangString , lang};
