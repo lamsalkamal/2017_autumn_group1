@@ -4,11 +4,12 @@ import './components/leftbar.css';
 import './App.css';
 
 //import Body from './components/body.js'
-import {Row,Grid,Col ,Button } from 'react-bootstrap'
+import {Row,Grid,Col ,Button, PageHeader } from 'react-bootstrap'
 import getStrings from './components/langString.js'
 import apiData from './Data/getData.js'
 import Graph from './components/graph.js'
 import Scenario from './components/scenario.js'
+import Indicator from './components/Indicator.js'
 import RegionLevel from './components/regionlevel.js'
 import Region from './components/region.js'
 import FeedBack from './components/feedBack.js'
@@ -17,6 +18,7 @@ import Language from './components/language.js'
 //import $ from 'jquery'
 //import Header from './components/Header.js'
 import HighchartsMore from 'highcharts-more'
+import leftbar from './components/leftbar.css'
 
 var Highcharts = require('highcharts');
 HighchartsMore(Highcharts)
@@ -257,6 +259,7 @@ class App extends Component {
         column: {
           pointPadding: 0,
           groupPadding: 0
+      
         }
       },
     };
@@ -432,10 +435,16 @@ class App extends Component {
       <div className="App">
 
 <Grid fluid id="layout-content" className="marginPage">
-<Row> 
+<Row  className="HeaderRow">
+      <Col xs={12} md={12}>
+    <h1> { getStrings.getLangString().ForestIndicator} </h1>
+    </Col>
+</Row>
+<Row className="mainRow"> 
 
 <Col xs={12} md={3} className='left'>
         <Language langChange={this.langChange} />
+
         <RegionLevel regionsLevels={this.state.regionsLevels}
           regionLevel={this.regionLevel}
           handleRegionUpdate={this.handleRegionUpdate}
@@ -448,23 +457,37 @@ class App extends Component {
           changeRegion={this.changeRegion}
           changeScenarioCollectionId={this.changeScenarioCollectionId}
           updateScenarioCollectionId={this.updateScenarioCollectionId}
-        />
-        </Col>
-  </Row>  
+        />        
         <Scenario scenariosA={this.state.scenariosA}
           updateScenarioCollectionId={this.updateScenarioCollectionId}
           onC={this.onC}
         />
-    
+      
+    </Col>
+    <Col xs={12} md={5} className="Middle">
         <Graph updateGraphValues={this.updateGraph}
           createGraphs={this.createGraphs}
         />
-
+        </Col>
+        <Col xs={12} md={3}  className="Right">
+          <Indicator scenariosA={this.state.scenariosA}
+          updateScenarioCollectionId={this.updateScenarioCollectionId}
+          onC={this.onC}
+        />
+        </Col>
+</Row>
+    <Row>
+     <Col xs={12} md={6}>
         <FeedBack />
+        <leftbar />
+     </Col>
+     <Col xs={12} md={6}>
         <ChoiceTransfer regionId={this.state.regionId}
           scenarioId={this.state.scenarioId}
           scenariosA={this.state.scenariosA}
         />
+      </Col>
+    </Row>
 </Grid>
 
 

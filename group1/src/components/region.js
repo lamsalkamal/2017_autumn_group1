@@ -13,22 +13,21 @@ class Region extends Component {
         const scenariosCollection = this.props.scenariosCollection.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
         //console.log(scenariosCollection)
         return (
-          <div>
-          <span>    
+          <Row className='padleft'>
+            
              <h4> {getStrings.getLangString().Area} </h4>
              <select id="regionId" onChange={this.props.changeRegion}>
                {regions}
              </select>   
              <abbr title={getStrings.getLangString().RegionDesc}>[?]</abbr>
-            </span>
-            <span>
+            
             <h4>{getStrings.getLangString().Scenariocollection}</h4>
              <select id="scenarioCollectionId" onChange={this.props.changeScenarioCollectionId}>  
                 {scenariosCollection}
              </select>
              <abbr title={getStrings.getLangString().ScenarioCollectionDesc}>[?]</abbr>
-             </span>  
-             </div>
+            
+             </Row>
         );
       }
 }

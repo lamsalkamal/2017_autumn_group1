@@ -38,7 +38,7 @@ class Graph extends Component {
 
       render() {
 
-       
+
       return (
       <div>
           <div>
@@ -48,8 +48,8 @@ class Graph extends Component {
         </div>
 
           <div id="container1" className="tabcontent">  </div>  
-          <div id="container2" className="tabcontent"  style={{display: 'none'}}>  </div>  
-          <div id="container3" className="tabcontent"  style={{display: 'none'}}> 
+          <div id="container2" className="tabcontent"  style={{display: 'None'}}>  </div>  
+          <div id="container3" className="tabcontent"  style={{display: 'None'}}> 
 
           <button id="printbut" onClick={this.printData.bind(this)}> Print table </button>
           <button id="exportpng" onClick={this.exportPNG.bind(this)}> Export to PNG </button>

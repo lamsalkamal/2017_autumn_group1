@@ -1,14 +1,6 @@
 
 .Header h1{
     text-align: center;
-   
-}
-.Header{
-    background-color:green;
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
 }
 
 .labelNotChosen{
@@ -19,7 +11,7 @@
 }
 
 .test {
-    color:green
+    color:green;
 }
 
 #regionLevelId {
@@ -53,31 +45,57 @@
 
 }
 .left{
-    float:left;
+    
     display: block;
     border: 1px solid black;
     padding-top:1em;   
     margin-left:1em;
-    background: lightseagreen;
+    background:green;
+    padding:7px;
+    margin-left:20px;
 }
 .Middle h1{
     text-align: center;
+    background: green;
+
+}
+.HeaderRow{
+    background-color: green;
+    color:black;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding:17px;
+
+}
+.HeaderRow h1{
+    text-align: center;
+}
+.mainRow{
+    padding: 0.5em;
+    margin-bottom:1em;
 
 }
 .Middle{
     padding-top: 1em;
     border:1px solid black;
     background: white;
-    margin-left:0.5em;
-    margin-right:0.5em;
+    margin-left:2em;
+    margin-right:2em;
+    background: auto;
 }
 .Right{
-    display: block;
-    float: right;
+  
     border: 1px solid black;
     padding:1em;
-    height:1000px;
-    background: lightseagreen;
+    width: 200px;
+    background:green;
+}
+.padleft{
+    padding-left:1em;
+ 
+    padding-bottom: 0.5em;
 }
 .paddBottom{
     padding-bottom: 1em;
@@ -98,7 +116,7 @@
     font-size: 120%;
     color:black;
     border-radius: 30px;
-    background: lightseagreen;
+    background: green;
     padding:7px;
     text-align: left;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -135,11 +153,4 @@
     padding: auto;
     border-bottom: black;
     float: left;
-
-
-}
-.Graph4{
-    padding: auto;
-    border-bottom: black;
-
 }
