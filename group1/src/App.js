@@ -127,7 +127,7 @@ class App extends Component {
   }
 
     changeScenarioCollectionId(event) {
-      this.state.scenarioId = event.target.value;
+      this.setState( { scenarioId : event.target.value}, () => {});
       this.updateScenarioCollectionId(event.target.value, this.state.regionId);
    }
    //Same idea as changeRegionDefault
@@ -135,7 +135,7 @@ class App extends Component {
      /* console.log("hi")
       console.log(defaultValue)
       console.log(this.state.regionId)*/
-      this.state.scenarioId = defaultValue;
+      this.setState( { scenarioId : defaultValue }, () => {});
       this.updateScenarioCollectionId(defaultValue, this.state.regionId);
   }
   
