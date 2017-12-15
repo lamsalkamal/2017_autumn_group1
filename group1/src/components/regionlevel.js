@@ -9,17 +9,9 @@ class RegionLevel extends Component {
 
         const regionLevels = this.props.regionsLevels.map(item=><option key={item.id} value={item.id}>{item.name}</option>)
         return (
-          <Col xs={12}  md={3} >
-          <span>         
-          <b>Language</b>
-          <select id="languageSelect" onChange={this.props.langChange}>
-              <option selected="selected"> English </option>
-              <option selected="selected"> Suomi </option>
-              </select> 
-              <abbr title={getStrings.getLangString().LanguageDesc}>[?]</abbr>
-          </span>
-          <span>
-          <h4>{getStrings.getLangString().Regionlevel} </h4>
+          <Col xs={12}  md={12} >
+             <span>
+             <h4>{getStrings.getLangString().Regionlevel} </h4>
               <select id="regionLevelId" onChange={this.props.change}>
               <option disabled selected="selected"> -- select an option -- </option>
                   {regionLevels}

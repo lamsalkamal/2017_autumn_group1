@@ -12,6 +12,7 @@ let langStringEN = {
         INDICATORS : "INDICATORS",
         ForestIndicator: "Forest Indicator",
         SendFeedback : "Send Feedback",
+        Melatupa : "MELATupa service",
         LanguageDesc : "Select the language to switch the interface's language",
         ScenarioCollectionDesc : "Finally you can select one of the scenario's collections",
         RegionDesc : "Then you take one of the region",
@@ -27,10 +28,11 @@ let langStringFI = {
         INDICATORS : "INDIKATTOREIDEN VALINTA",
         ForestIndicator: "Metsämittari",
         SendFeedback : "Anna palautetta",
-        LanguageDesc : "",
-        ScenarioCollectionDesc : "",
-        RegionDesc : "",
-        RegionlevelDesc : ""
+        Melatupa : "MELATupa Palvelu",
+        LanguageDesc : "Select the language to switch the interface's language",
+        ScenarioCollectionDesc : "Valitse skenario",
+        RegionDesc : "Sitten valitse haluamsi alue",
+        RegionlevelDesc : "Aluksi valitse haluamasi aluetaso"
     } 
 
 
