@@ -11,7 +11,8 @@ let langStringEN = {
         PERIODS : "PERIODS",
         INDICATORS : "INDICATORS",
         ForestIndicator: "Forest Indicator",
-        SendFeedback : "Send Feedback"
+        SendFeedback : "Send Feedback",
+        Melatupa : "MELATupa service"
     }
 let langStringFI = {
         Regionlevel : "Aluetaso",
@@ -21,7 +22,8 @@ let langStringFI = {
         PERIODS : "AJANKOHTA",
         INDICATORS : "INDIKATTOREIDEN VALINTA",
         ForestIndicator: "Metsämittari",
-        SendFeedback : "Anna palautetta"
+        SendFeedback : "Anna palautetta",
+        Melatupa : "MELATupa Palvelu"
     } 
 
 

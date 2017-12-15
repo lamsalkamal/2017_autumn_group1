@@ -11,6 +11,7 @@ import Scenario from './components/scenario.js'
 import RegionLevel from './components/regionlevel.js'
 import Region from './components/region.js'
 import FeedBack from './components/feedBack.js'
+import Transfer from './components/choiceTransfer.js'
 //import $ from 'jquery'
 
 import HighchartsMore from 'highcharts-more'
@@ -33,6 +34,7 @@ class App extends Component {
       regions : [],
       scenariosCollection : [],
       regionId : "1",
+      scenarioId : "1",
 
       scenariosA : [],
 
@@ -124,6 +126,7 @@ class App extends Component {
   }
 
     changeScenarioCollectionId(event) {
+      this.state.scenarioId = event.target.value;
       this.updateScenarioCollectionId(event.target.value, this.state.regionId);
    }
    //Same idea as changeRegionDefault
@@ -131,6 +134,7 @@ class App extends Component {
      /* console.log("hi")
       console.log(defaultValue)
       console.log(this.state.regionId)*/
+      this.state.scenarioId = defaultValue;
       this.updateScenarioCollectionId(defaultValue, this.state.regionId);
   }
   
@@ -271,6 +275,10 @@ class App extends Component {
                 createGraph = {this.createGraph}
                />
         <FeedBack/>
+        <Transfer regionId = { this.state.regionId }
+                  scenarioId = { this.state.scenarioId }
+                  scenariosA = { this.state.scenariosA }
+                  />
       </div>
       
     );
