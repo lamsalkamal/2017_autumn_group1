@@ -15,7 +15,7 @@ import FeedBack from './components/feedBack.js'
 import Transfer from './components/choiceTransfer.js'
 import Language from './components/language.js'
 //import $ from 'jquery'
-import Header from './components/Header.js'
+//import Header from './components/Header.js'
 import HighchartsMore from 'highcharts-more'
 
 var Highcharts = require('highcharts');
@@ -347,13 +347,7 @@ class App extends Component {
     return (
 
       <div className="App">
-<<<<<<< HEAD
-      <Header
-      />
-        
-=======
         <Language langChange = { this.langChange }/>
->>>>>>> 71885bd15c3d496deaa0595bd5c16e7f791b68b4
         <RegionLevel regionsLevels = { this.state.regionsLevels }
                      regionLevel = { this.regionLevel }
                      handleRegionUpdate = { this.handleRegionUpdate }
