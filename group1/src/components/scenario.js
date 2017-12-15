@@ -76,7 +76,7 @@ class Scenario extends Component {
           
             <Col xs={12}  md={3}   className='Right'>
               <h4> { getStrings.getLangString().INDICATORS} 
-              <abbr title={getStrings.getLangString().IdicatorDesc}>[?]</abbr> </h4>
+              <abbr title={getStrings.getLangString().IndicatorDesc}>[?]</abbr> </h4>
              <ul id="indicatorId">
                 {indicatorsArray}
              </ul>
