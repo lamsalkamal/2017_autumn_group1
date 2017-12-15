@@ -47,11 +47,7 @@ class Scenario extends Component {
     
         return (
           <Grid fluid id="layout-content" className="marginPage">
-          <Row>
-            <Col xs={12} md={12}  className='Header'>
-              <h1>{ getStrings.getLangString().ForestIndicator} </h1>
-              </Col>
-            </Row>
+
             <Row>
                 <Col xs={12}  md={3}  className='left'>
                <Row>      
@@ -70,7 +66,7 @@ class Scenario extends Component {
              </ul>
              </span>  
             </Col>
-            <Col xs={12}  md={5}   className='Middle'>
+            <Col xs={12}  md={5}  className='Middle'>
               
           <div id="container"></div>
              
