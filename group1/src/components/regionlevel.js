@@ -16,6 +16,7 @@ class RegionLevel extends Component {
               <option selected="selected"> English </option>
               <option selected="selected"> Suomi </option>
               </select> 
+              <abbr title={getStrings.getLangString().LanguageDesc}>[?]</abbr>
           </span>
           <span>
           <h4>{getStrings.getLangString().Regionlevel} </h4>
@@ -23,7 +24,7 @@ class RegionLevel extends Component {
               <option disabled selected="selected"> -- select an option -- </option>
                   {regionLevels}
               </select> 
-            
+              <abbr title={getStrings.getLangString().RegionlevelDesc}>[?]</abbr>
               </span>        
           </Col>
         );
