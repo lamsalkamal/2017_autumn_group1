@@ -13,6 +13,7 @@ import RegionLevel from './components/regionlevel.js'
 import Region from './components/region.js'
 import FeedBack from './components/feedBack.js'
 import Transfer from './components/choiceTransfer.js'
+import Language from './components/language.js'
 //import $ from 'jquery'
 
 import HighchartsMore from 'highcharts-more'
@@ -155,9 +156,32 @@ class App extends Component {
     }
     else {
       e.target.className = e.target.className.replace("labelNotChosen", "labelChosen")
+      if (e.target.className.indexOf("periods")> -1) {
+         this.checkPeriod(e.target,data);
+      }
+      else if (e.target.className.indexOf("scenarios")> -1 || e.target.className.indexOf("indicators")> -1 ) {
+         this.checkScenarioIndicator(e.target,data);
+       }
     }
     this.refreshValues()
   }
+
+  checkPeriod(target, data) {
+    var periodsArray = document.getElementsByClassName('periods')
+    for(var j=0; j<periodsArray.length; j++) { 
+      if(target !== periodsArray[j]) {
+        periodsArray[j].className = periodsArray[j].className.replace("labelChosen", "labelNotChosen")
+      }
+    }
+  }
+
+  checkScenarioIndicator(target, data) {
+    var scenariosArray = document.getElementsByClassName('labelChosen scenarios')
+    var indicatorsArray = document.getElementsByClassName('labelChosen indicators')
+    if(scenariosArray.length * indicatorsArray.length > 20) {
+      target.className = target.className.replace("labelChosen", "labelNotChosen")
+    }
+  } 
 
    //---Graph--
   updateGraph(arrayValues) {
@@ -175,7 +199,7 @@ class App extends Component {
     for(var i=0; i<scenariosArray.length; i++) { 
       scenariosAccepted.push(scenariosArray[i].attributes.getNamedItem("value").nodeValue)
     }
-    console.log(scenariosAccepted)
+    //console.log(scenariosAccepted)
 
     var periodsArray = document.getElementsByClassName('labelChosen periods')
     for(var j=0; j<periodsArray.length; j++) { 
@@ -287,7 +311,7 @@ class App extends Component {
               var indicatorsArray = document.getElementsByClassName('labelChosen indicators')
               for(var z=0; z<indicatorsArray.length; z++) { 
                 indicatorsAccepted.push(indicatorsArray[z].attributes.getNamedItem("value").nodeValue)
-                console.log(indicartorsAcceptedNames.push(indicatorsArray[z].innerHTML))
+                //console.log(indicartorsAcceptedNames.push(indicatorsArray[z].innerHTML))
               }
             
 
@@ -323,9 +347,9 @@ class App extends Component {
     return (
 
       <div className="App">
+        <Language langChange = { this.langChange }/>
         <RegionLevel regionsLevels = { this.state.regionsLevels }
                      regionLevel = { this.regionLevel }
-                     langChange = { this.langChange }
                      handleRegionUpdate = { this.handleRegionUpdate }
                      change = { this.change }
                      />
