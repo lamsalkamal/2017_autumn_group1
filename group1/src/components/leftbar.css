@@ -103,6 +103,7 @@
 }
 #scenarioId{
     font-size: 1em; 
+    background-color: lightseagreen;
     color:black;
     border-radius: 30px;
     padding:7px;
@@ -112,11 +113,10 @@
 }
 
 #periodId{
-
+    background-color: lightseagreen;
     font-size: 120%;
     color:black;
     border-radius: 30px;
-    background: green;
     padding:7px;
     text-align: left;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -127,10 +127,11 @@
 }
 
 #indicatorId {
-    font-size: 100% ;
+    font-size: 15px;
     background: lightseagreen;
     border-radius: 30px;
     padding:7px;
+    width:100%;
     text-align: left;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     

@@ -476,7 +476,7 @@ class App extends Component {
     <Row>
      <Col xs={12} md={6}>
         <FeedBack />
-        <leftbar />
+       
      </Col>
      <Col xs={12} md={6}>
         <ChoiceTransfer regionId={this.state.regionId}

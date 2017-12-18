@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import {Row,Grid,Col} from 'react-bootstrap'
+import {Row} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import getStrings from './langString.js'
 
@@ -36,7 +36,7 @@ class Indicator extends Component {
           
            <h4> { getStrings.getLangString().INDICATORS} 
               <abbr title={getStrings.getLangString().IndicatorDesc}>[?]</abbr> </h4>
-             <ul>
+             <ul id="indicatorId">
                 {indicatorsArray}
              </ul>
              </Row>
