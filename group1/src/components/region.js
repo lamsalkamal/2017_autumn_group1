@@ -15,13 +15,13 @@ class Region extends Component {
         return (
           <Row className='padleft'>
             
-             <h4> {getStrings.getLangString().Area} </h4>
+             <h2 className="PageHeader"> {getStrings.getLangString().Area} </h2>
              <select id="regionId" onChange={this.props.changeRegion}>
                {regions}
              </select>   
              <abbr title={getStrings.getLangString().RegionDesc}>[?]</abbr>
             
-            <h4>{getStrings.getLangString().Scenariocollection}</h4>
+             <h2 className="PageHeader">{getStrings.getLangString().Scenariocollection}</h2>
              <select id="scenarioCollectionId" onChange={this.props.changeScenarioCollectionId}>  
                 {scenariosCollection}
              </select>

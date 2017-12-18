@@ -34,8 +34,8 @@ class Indicator extends Component {
         
           <Row>    
           
-           <h4> { getStrings.getLangString().INDICATORS} 
-              <abbr title={getStrings.getLangString().IndicatorDesc}>[?]</abbr> </h4>
+          <h2 className="PageHeader"> { getStrings.getLangString().INDICATORS} 
+              <abbr title={getStrings.getLangString().IndicatorDesc}>[?]</abbr> </h2>
              <ul id="indicatorId">
                 {indicatorsArray}
              </ul>

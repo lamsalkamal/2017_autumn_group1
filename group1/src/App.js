@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import './components/leftbar.css';
 import './components/header.css'
 import './App.css';
 

@@ -11,7 +11,7 @@ class RegionLevel extends Component {
         return (
            
              <Row className='padleft'>
-             <h4>{getStrings.getLangString().Regionlevel} </h4>
+             <h2 className="PageHeader">{getStrings.getLangString().Regionlevel} </h2>
               <select id="regionLevelId" onChange={this.props.change}>
               <option disabled selected="selected"> -- select an option -- </option>
                   {regionLevels}

@@ -50,15 +50,15 @@ class Scenario extends Component {
         
           <Row  className="padleft">       
            <span className='paddBottom'>
-             <h4> { getStrings.getLangString().SCENARIOS} 
-             <abbr title={getStrings.getLangString().ScenarioDesc}>[?]</abbr> </h4>  
+             <h2 className="PageHeader">{ getStrings.getLangString().SCENARIOS} 
+             <abbr title={getStrings.getLangString().ScenarioDesc}>[?]</abbr> </h2>  
               <ul id="scenarioId" >
                 {scenarios}
              </ul>
              </span>
              <span>
-              <h4> { getStrings.getLangString().PERIODS} 
-              <abbr title={getStrings.getLangString().TimeDesc}>[?]</abbr> </h4>
+             <h2 className="PageHeader">{ getStrings.getLangString().PERIODS} 
+              <abbr title={getStrings.getLangString().TimeDesc}>[?]</abbr> </h2>
              <ul id="periodId" >
                 {periods}
              </ul>
