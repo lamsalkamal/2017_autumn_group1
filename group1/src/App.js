@@ -70,6 +70,9 @@ class App extends Component {
         this.setState({ regionsLevels: result })
       });
       getStrings.chooseLang(this.state.lang);
+
+      const scenariosCollectionDefault = this.state.scenariosCollection.map(item => <option key={item.id} value={item.id}>{item.name}</option>)
+      this.changeScenarioCollectionIdDefault(scenariosCollectionDefault[0].key);
     });
   }
 
