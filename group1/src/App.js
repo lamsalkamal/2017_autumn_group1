@@ -142,8 +142,6 @@ class App extends Component {
   }
 
   //---Scenario--
-  //THERE IS BUG WHEN CHOOSING REGIONLEVEL: FORESTRY CENTER AND AREA: AHVENANMAA IT GIVES ERROR BEACAUSE REGIONID IS 0
-  //AND I THINK THIS IS MISTAKE IN API
   updateScenarioCollectionId(scenarioCollectionId, regionId) {
     apiData.getScenarioCollection(scenarioCollectionId, regionId).then(result => {
       this.setState({ scenariosA: result }, () => {
