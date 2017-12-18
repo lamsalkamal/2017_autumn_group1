@@ -226,10 +226,11 @@ class App extends Component {
     // console.log(this.state.valuesGraph)
     document.getElementById("container1").innerHTML = "";
     document.getElementById("container2").innerHTML = "";
+    document.getElementById("container3").innerHTML = "";
 
     var printBut = document.getElementById("printbut");
     var exportPNG = document.getElementById("exportpng");
-    document.getElementById("container3").innerHTML = "";
+    document.getElementById("container4").innerHTML = "";
 
 
 
@@ -331,22 +332,81 @@ class App extends Component {
     ////////HERE
 
 
-
+    var titleGraph2 = "";
     var periodsArray = document.getElementsByClassName('labelChosen periods');
     if (periodsArray.length > 0) {
       var element = document.getElementById("regionId");
       var textSelected = element.options[element.selectedIndex].text;
 
       myChart.setTitle({ text: textSelected + " " + periodsArray[0].innerHTML });
+      titleGraph2 = textSelected + " " + periodsArray[0].innerHTML;
     }
     myChart.redraw();
 
-
-
     //   GRAPH 2 :
-    var options2 = {
+
+    var aDiv = document.createElement('div');
+    aDiv.innerHTML = "<h2>" + titleGraph2 + " </h2>"
+    document.getElementById('container2').appendChild(aDiv);
+
+    for(var value = 0; value < DDArray.length; value++) {
+      var iDiv = document.createElement('div');
+      document.getElementById('container2').appendChild(iDiv);
+
+      var options2 = {
+        chart: {
+          renderTo: iDiv,
+          polar: true
+        },
+        title: {
+          text: 'My title'
+        },
+        pane: {
+          startAngle: 0,
+          endAngle: 360
+        },
+        xAxis: {
+          min: 0,
+          max: 360
+        },
+        yAxis: {
+          min: 0
+        },
+        plotOptions: {
+          series: {
+            pointStart: 0,
+            colorByPoint: true
+          },
+          column: {
+            pointPadding: 0,
+            groupPadding: 0
+        
+          }
+        },
+      };
+
+
+      options2.plotOptions.series.pointInterval = Math.round(360 / DDArray.length);
+     
+     // options.renderTo = 'polarchart' + value;
+
+      var myNewChart = new Highcharts.Chart(options2);
+      
+   // console.log(DDArray[value])
+        myNewChart.addSeries({
+        type: 'column',
+        name: scenariosArrayHTML[value],
+        data: DDArray[value]
+      });
+
+      myNewChart.setTitle({ text: scenariosArrayHTML[value] });
+    }
+
+
+    //   GRAPH 3 :
+    var options3 = {
       chart: {
-        renderTo: 'container2',
+        renderTo: 'container3',
         type: 'column'
       },
       title: {
@@ -374,7 +434,7 @@ class App extends Component {
       }
     };
 
-    var myChart2 = new Highcharts.Chart(options2);
+    var myChart2 = new Highcharts.Chart(options3);
 
    /* var indicatorsAcceptedHTML = []
     var indicatorsArray = document.getElementsByClassName('labelChosen indicators')
@@ -427,7 +487,7 @@ class App extends Component {
 
 
 
-    //   GRAPH 3 : 
+    //   GRAPH 4 : 
     // document.getElementById("container3").innerHTML = "";
     var tbl;
     tbl = document.createElement('table');
@@ -471,9 +531,9 @@ class App extends Component {
       // oldIndicator = element.indicatorId
     }
 
-    document.getElementById("container3").appendChild(tbl);
-    document.getElementById("container3").appendChild(printBut);
-    document.getElementById("container3").appendChild(exportPNG);
+    document.getElementById("container4").appendChild(tbl);
+    document.getElementById("container4").appendChild(printBut);
+    document.getElementById("container4").appendChild(exportPNG);
 
 
 

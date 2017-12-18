@@ -43,13 +43,15 @@ class Graph extends Component {
       <div>
           <div>
           <button onClick={this.show.bind(this, 'container1', '1')}>Polar chart</button>
-          <button onClick={this.show.bind(this, 'container2', '2')}>Bar chart</button>
-          <button onClick={this.show.bind(this, 'container3', '3')}>Table</button>
+          <button onClick={this.show.bind(this, 'container2', '2')}>Many polar chart</button>
+          <button onClick={this.show.bind(this, 'container3', '3')}>Bar chart</button>
+          <button onClick={this.show.bind(this, 'container4', '4')}>Table</button>
         </div>
 
           <div id="container1" className="tabcontent">  </div>  
           <div id="container2" className="tabcontent"  style={{display: 'None'}}>  </div>  
-          <div id="container3" className="tabcontent"  style={{display: 'None'}}> 
+          <div id="container3" className="tabcontent"  style={{display: 'None'}}>  </div>  
+          <div id="container4" className="tabcontent"  style={{display: 'None'}}> 
 
           <button id="printbut" onClick={this.printData.bind(this)}> Print table </button>
           <button id="exportpng" onClick={this.exportPNG.bind(this)}> Export to PNG </button>
