@@ -48,12 +48,12 @@ let langStringFI = {
         TimeDesc : "Valitse yksi aikaväli",
         IndicatorDesc : "Maksimi määrä skenaario-indikaattori yhdistelmiä (valitut skenaariot * valitut indikaattorit) on 20 ",
         ScenarioDesc : "Maksimi määrä skenaario-indikaattori yhdistelmiä (valitut skenaariot * valitut indikaattorit) on 20 ",
-        PolarChart : "",
-        ManyPolarChart : "",
-        BarChart : "",
-        Table : "",
-        PrintTable : "",
-        ExportPng : ""
+        PolarChart: "Polar-kaaviot",
+        ManyPolarChart: "Monet polar-kaaviot",
+        BarChart: "Pylväsdiagrammi",
+        Table: "Pöytä",
+        PrintTable: "Tulosta pöytä",
+        ExportPng: "Vie PNG-tiedostoon"
     } 
 
 
