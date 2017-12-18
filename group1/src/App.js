@@ -387,7 +387,6 @@ class App extends Component {
     for (var i = 0; i < scenariosArray.length; i++) {
       var tds = trFirst.insertCell();
       tds.style.border = '1px solid black';
-      tds.className = "vertical"
       tds.appendChild(document.createTextNode(scenariosArray[i].innerHTML));
     }
 
