@@ -42,9 +42,9 @@ class Graph extends Component {
       return (
       <div>
           <div>
-          <button onClick={this.show.bind(this, 'container1', '1')}>Graph1</button>
-          <button onClick={this.show.bind(this, 'container2', '2')}>Graph2</button>
-          <button onClick={this.show.bind(this, 'container3', '3')}>Graph3</button>
+          <button onClick={this.show.bind(this, 'container1', '1')}>Pie chart</button>
+          <button onClick={this.show.bind(this, 'container2', '2')}>Bar chart</button>
+          <button onClick={this.show.bind(this, 'container3', '3')}>Table</button>
         </div>
 
           <div id="container1" className="tabcontent">  </div>  
