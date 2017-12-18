@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import html2canvas from 'html2canvas'
+import getStrings from './langString.js'
 
 
 class Graph extends Component {
@@ -42,10 +43,10 @@ class Graph extends Component {
       return (
       <div>
           <div>
-          <button onClick={this.show.bind(this, 'container1', '1')}>Polar chart</button>
-          <button onClick={this.show.bind(this, 'container2', '2')}>Many polar chart</button>
-          <button onClick={this.show.bind(this, 'container3', '3')}>Bar chart</button>
-          <button onClick={this.show.bind(this, 'container4', '4')}>Table</button>
+          <button onClick={this.show.bind(this, 'container1', '1')}>{getStrings.getLangString().PolarChart}</button>
+          <button onClick={this.show.bind(this, 'container2', '2')}>{getStrings.getLangString().ManyPolarChart}</button>
+          <button onClick={this.show.bind(this, 'container3', '3')}>{getStrings.getLangString().BarChart}</button>
+          <button onClick={this.show.bind(this, 'container4', '4')}>{getStrings.getLangString().Table}</button>
         </div>
 
           <div id="container1" className="tabcontent">  </div>  
@@ -53,8 +54,8 @@ class Graph extends Component {
           <div id="container3" className="tabcontent"  style={{display: 'None'}}>  </div>  
           <div id="container4" className="tabcontent"  style={{display: 'None'}}> 
 
-          <button id="printbut" onClick={this.printData.bind(this)}> Print table </button>
-          <button id="exportpng" onClick={this.exportPNG.bind(this)}> Export to PNG </button>
+          <button id="printbut" onClick={this.printData.bind(this)}> {getStrings.getLangString().PrintTable} </button>
+          <button id="exportpng" onClick={this.exportPNG.bind(this)}>{getStrings.getLangString().ExportPng}</button>
             
           
           

@@ -70,8 +70,10 @@ class App extends Component {
       });
       getStrings.chooseLang(this.state.lang);
 
-      const scenariosCollectionDefault = this.state.scenariosCollection.map(item => <option key={item.id} value={item.id}>{item.name}</option>)
-      this.changeScenarioCollectionIdDefault(scenariosCollectionDefault[0].key);
+      if(this.state.scenariosCollection.length > 0) {
+          const scenariosCollectionDefault = this.state.scenariosCollection.map(item => <option key={item.id} value={item.id}>{item.name}</option>)
+          this.changeScenarioCollectionIdDefault(scenariosCollectionDefault[0].key);
+      }
     });
   }
 

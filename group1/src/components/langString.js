@@ -21,8 +21,13 @@ let langStringEN = {
         MelatupaDesc : "Open Melatupa service with selected values",
         TimeDesc : "Choose one time Period",
         IndicatorDesc : "The maximum number of scenario–indicator combinations (chosen scenarios * chosen indicators) is 20",
-        ScenarioDesc : "The maximum number of scenario–indicator combinations (chosen scenarios * chosen indicators) is 20 "
-
+        ScenarioDesc : "The maximum number of scenario–indicator combinations (chosen scenarios * chosen indicators) is 20 ",
+        PolarChart : "Polar Chart",
+        ManyPolarChart : "Many Polar Charts",
+        BarChart : "Bar Chart",
+        Table : "Table",
+        PrintTable : "Print table",
+        ExportPng : "Export to PNG"
     }
 let langStringFI = {
         Regionlevel : "Aluetaso",
@@ -42,7 +47,13 @@ let langStringFI = {
         MelatupaDesc : "Avaa Melatupa palvelu valituilla arvoilla",
         TimeDesc : "Valitse yksi aikaväli",
         IndicatorDesc : "Maksimi määrä skenaario-indikaattori yhdistelmiä (valitut skenaariot * valitut indikaattorit) on 20 ",
-        ScenarioDesc : "Maksimi määrä skenaario-indikaattori yhdistelmiä (valitut skenaariot * valitut indikaattorit) on 20 "
+        ScenarioDesc : "Maksimi määrä skenaario-indikaattori yhdistelmiä (valitut skenaariot * valitut indikaattorit) on 20 ",
+        PolarChart : "",
+        ManyPolarChart : "",
+        BarChart : "",
+        Table : "",
+        PrintTable : "",
+        ExportPng : ""
     } 
 
 
