@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 
 import './components/leftbar.css';
+import './components/header.css'
 import './App.css';
 
 //import Body from './components/body.js'
-import {Row,Grid,Col ,Button, PageHeader } from 'react-bootstrap'
+import {Row,Grid,Col} from 'react-bootstrap'
 import getStrings from './components/langString.js'
 import apiData from './Data/getData.js'
 import Graph from './components/graph.js'
@@ -18,7 +19,6 @@ import Language from './components/language.js'
 //import $ from 'jquery'
 //import Header from './components/Header.js'
 import HighchartsMore from 'highcharts-more'
-import leftbar from './components/leftbar.css'
 
 var Highcharts = require('highcharts');
 HighchartsMore(Highcharts)
@@ -264,19 +264,73 @@ class App extends Component {
         }
       },
     };
-    options.xAxis.tickInterval = Math.round(360 / (this.state.valuesGraph.length));
-    options.plotOptions.series.pointInterval = Math.round(360 / (this.state.valuesGraph.length));
-    var myChart = new Highcharts.Chart(options);
+  //  options.xAxis.tickInterval = Math.round(360 / (this.state.valuesGraph.length));
+    
     var valuesA = []
     this.state.valuesGraph.forEach(function (element) {
       valuesA.push(element.value)
     })
-    myChart.addSeries({
-      type: 'column',
-      name: 'Column',
-      data: valuesA,
-      pointPlacement: 'between'
-    });
+
+    ////////HERE
+
+
+    var indicatorsAcceptedHTML = []
+    var indicatorsArray = document.getElementsByClassName('labelChosen indicators')
+    for (var z = 0; z < indicatorsArray.length; z++) {
+      indicatorsAcceptedHTML.push(indicatorsArray[z].innerHTML)
+    }
+
+  //  myChart2.xAxis[0].setCategories(indicatorsAcceptedHTML);
+
+/*
+    var valuesA = []
+    this.state.valuesGraph.forEach(function (element) {
+      valuesA.push(element.value)
+    })*/
+    var scenariosArray = document.getElementsByClassName('labelChosen scenarios')
+
+    var DDArray = new Array(scenariosArray.length);
+    //console.log(this.state.valuesGraph)
+    for(var g = 0; g < DDArray.length; g++) {
+      DDArray[g] = [];
+      this.state.valuesGraph.forEach(function (element) {
+        if(element.scenarioId === parseInt(scenariosArray[g].attributes.getNamedItem("value").nodeValue,10)) {
+          DDArray[g].push(element.value)
+        }
+      })
+    }
+
+    var scenariosArrayHTML = []
+    for (var e = 0; e < scenariosArray.length; e++) {
+      scenariosArrayHTML.push(scenariosArray[e].innerHTML)
+    }
+
+    var biggestRow = 0;
+    for(var t = 0; t < DDArray.length; t++) {
+      
+      if(DDArray[t].length > biggestRow) {
+        biggestRow = DDArray[t].length
+      }
+    }
+
+    options.plotOptions.series.pointInterval = Math.round(360 / biggestRow);
+    var myChart = new Highcharts.Chart(options);
+
+    for(var x = 0; x < DDArray.length; x++) {
+      
+   // console.log(DDArray[x])
+      myChart.addSeries({
+        type: 'column',
+        name: scenariosArrayHTML[x],
+        data: DDArray[x]
+      });
+    }
+      
+   
+
+    ////////HERE
+
+
 
     var periodsArray = document.getElementsByClassName('labelChosen periods');
     if (periodsArray.length > 0) {
@@ -322,11 +376,11 @@ class App extends Component {
 
     var myChart2 = new Highcharts.Chart(options2);
 
-    var indicatorsAcceptedHTML = []
+   /* var indicatorsAcceptedHTML = []
     var indicatorsArray = document.getElementsByClassName('labelChosen indicators')
     for (var z = 0; z < indicatorsArray.length; z++) {
       indicatorsAcceptedHTML.push(indicatorsArray[z].innerHTML)
-    }
+    }*/
 
     myChart2.xAxis[0].setCategories(indicatorsAcceptedHTML);
 /*
@@ -334,7 +388,7 @@ class App extends Component {
     var valuesA = []
     this.state.valuesGraph.forEach(function (element) {
       valuesA.push(element.value)
-    })*/
+    })
     var scenariosArray = document.getElementsByClassName('labelChosen scenarios')
 
     var DDArray = new Array(scenariosArray.length);
@@ -352,13 +406,13 @@ class App extends Component {
     for (var e = 0; e < scenariosArray.length; e++) {
       scenariosArrayHTML.push(scenariosArray[e].innerHTML)
     }
-
+*/
     //console.log(this.state.valuesGraph)
     //console.log(DDArray)
-    console.log(DDArray.length)
+    //console.log(DDArray.length)
     for(var numb = 0; numb < DDArray.length; numb++) {
       
-    console.log(DDArray[numb])
+   // console.log(DDArray[numb])
       myChart2.addSeries({
         type: 'column',
         name: scenariosArrayHTML[numb],

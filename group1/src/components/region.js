@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import {Row,Col} from 'react-bootstrap'
+import {Row} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import getStrings from './langString.js'
 
