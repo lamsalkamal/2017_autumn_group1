@@ -23,7 +23,7 @@ let langStringEN = {
         IndicatorDesc : "The maximum number of scenario–indicator combinations (chosen scenarios * chosen indicators) is 20",
         ScenarioDesc : "The maximum number of scenario–indicator combinations (chosen scenarios * chosen indicators) is 20 ",
         PolarChart : "Polar Chart",
-        ManyPolarChart : "Many Polar Charts",
+        ManyPolarChart : "Multi Polar Charts",
         BarChart : "Bar Chart",
         Table : "Table",
         PrintTable : "Print table",
@@ -49,10 +49,10 @@ let langStringFI = {
         IndicatorDesc : "Maksimi määrä skenaario-indikaattori yhdistelmiä (valitut skenaariot * valitut indikaattorit) on 20 ",
         ScenarioDesc : "Maksimi määrä skenaario-indikaattori yhdistelmiä (valitut skenaariot * valitut indikaattorit) on 20 ",
         PolarChart: "Polar-kaaviot",
-        ManyPolarChart: "Monet polar-kaaviot",
+        ManyPolarChart: "Multi polar-kaaviot",
         BarChart: "Pylväsdiagrammi",
-        Table: "Pöytä",
-        PrintTable: "Tulosta pöytä",
+        Table: "Taulukko",
+        PrintTable: "Tulosta taulukko",
         ExportPng: "Vie PNG-tiedostoon"
     } 
 
